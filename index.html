@@ -39,6 +39,8 @@
     }
     .skill-circle, .project-card {
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 1;
+      transform: scale(1);
     }
     .skill-circle:hover, .project-card:hover {
       transform: scale(1.1);
@@ -123,6 +125,13 @@
                   {item}
                 </a>
               ))}
+              <a
+                href="https://gray-abbe-88.tiiny.site"
+                download="Monisha_Murali_Resume.pdf"
+                className="text-white bg-blue-600 hover:bg-blue-700 transition px-3 py-2 rounded-md text-sm font-medium"
+              >
+                Download Resume
+              </a>
             </div>
           </div>
         </div>
@@ -159,7 +168,7 @@
           x: -50,
           stagger: 0.3,
           duration: 1,
-          scrollTrigger: { trigger: expRef.current, start: 'top 80%' },
+          scrollTrigger: { trigger: expRef.current, start: 'top 90%' },
         });
       }, []);
       return (
@@ -199,7 +208,7 @@
           y: 50,
           stagger: 0.2,
           duration: 1,
-          scrollTrigger: { trigger: projectRef.current, start: 'top 80%' },
+          scrollTrigger: { trigger: projectRef.current, start: 'top 90%' },
         });
       }, []);
       return (
@@ -236,12 +245,17 @@
       ];
       const skillRef = useRef(null);
       useEffect(() => {
+        console.log('Skills section mounted, skills:', skills);
         gsap.from(skillRef.current.children, {
-          scale: 0,
           opacity: 0,
+          scale: 0,
           stagger: 0.1,
           duration: 0.8,
-          scrollTrigger: { trigger: skillRef.current, start: 'top 80%' },
+          scrollTrigger: { 
+            trigger: skillRef.current, 
+            start: 'top 90%',
+            onEnter: () => console.log('Skills animation triggered'),
+          },
         });
       }, []);
       return (
@@ -249,32 +263,35 @@
           <div className="max-w-5xl">
             <h2 className="text-4xl font-bold text-blue-400 mb-8">Skills</h2>
             <div ref={skillRef} className="grid grid-cols-2 md:grid-cols-3 gap-6">
-              {skills.map((skill) => (
-                <div key={skill.name} className="skill-circle text-center">
-                  <div className="relative w-32 h-32 mx-auto">
-                    <svg className="w-full h-full" viewBox="0 0 36 36">
-                      <path
-                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                        fill="none"
-                        stroke="#444"
-                        strokeWidth="1"
-                      />
-                      <path
-                        d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                        fill="none"
-                        stroke="#3b82f6"
-                        strokeWidth="2"
-                        strokeDasharray={`${skill.level}, 100`}
-                      />
-                    </svg>
-                    <div className="absolute inset-0 flex items-center justify-center text-xl font-bold">
-                      {skill.level}%
+              {skills.map((skill) => {
+                console.log('Rendering skill:', skill.name);
+                return (
+                  <div key={skill.name} className="skill-circle text-center">
+                    <div className="relative w-32 h-32 mx-auto">
+                      <svg className="w-full h-full" viewBox="0 0 36 36">
+                        <path
+                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                          fill="none"
+                          stroke="#444"
+                          strokeWidth="1"
+                        />
+                        <path
+                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                          fill="none"
+                          stroke="#3b82f6"
+                          strokeWidth="2"
+                          strokeDasharray={`${skill.level}, 100`}
+                        />
+                      </svg>
+                      <div className="absolute inset-0 flex items-center justify-center text-xl font-bold">
+                        {skill.level}%
+                      </div>
                     </div>
+                    <p className="mt-2 text-gray-300">{skill.name}</p>
+                    <p className="text-sm text-gray-400">{skill.desc}</p>
                   </div>
-                  <p className="mt-2 text-gray-300">{skill.name}</p>
-                  <p className="text-sm text-gray-400">{skill.desc}</p>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
