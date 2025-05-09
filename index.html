@@ -3,54 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Monisha Murali - Data Symphony</title>
+  <title>Monisha Murali - Taekwondo Data Arena</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.20.6/babel.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body { font-family: 'Open Sans', sans-serif; margin: 0; overflow-x: hidden; }
-    h1, h2, h3 { font-family: 'Playfair Display', serif; }
-    .symphony-bg {
+    body { font-family: 'Lato', sans-serif; margin: 0; overflow-x: hidden; }
+    h1, h2, h3 { font-family: 'Poppins', sans-serif; }
+    .arena-bg {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(180deg, #F8F1E9 0%, #EDE4E0 100%);
+      background: linear-gradient(180deg, #FFFFFF 0%, #E0F7FA 100%);
       z-index: -1;
       overflow: hidden;
     }
-    .staff-lines {
+    .belt-path {
       position: absolute;
-      width: 100%;
-      height: 100%;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="none" stroke="%23D4A017" stroke-width="2" stroke-opacity="0.3" d="M0,160C240,80,480,240,720,160C960,80,1200,240,1440,160"/></svg>') repeat-x;
-      animation: flow 15s linear infinite;
+      left: 50%;
+      top: 100vh; /* Start after intro section */
+      bottom: 80px; /* End before footer */
+      width: 4px;
+      background: linear-gradient(to top, #FFD700, #00ACC1);
+      transform: translateX(-50%);
+      animation: pulse 3s ease-in-out infinite;
+      z-index: 0;
     }
-    @keyframes flow { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-    .note {
-      background: rgba(255, 255, 255, 0.9);
-      border: 2px solid #D4A017;
+    @keyframes pulse { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+    .arena {
+      background: rgba(255, 255, 255, 0.95);
+      border: 3px solid #FFD700;
       border-radius: 50%;
-      width: 300px;
-      height: 300px;
+      width: 350px;
+      height: 350px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      box-shadow: 0 0 20px rgba(0, 128, 128, 0.2);
-      transform: scale(0.8);
+      box-shadow: 0 0 20px rgba(0, 172, 193, 0.3);
+      transform: scale(0.9);
       opacity: 0;
       transition: transform 0.5s ease, opacity 0.5s ease, box-shadow 0.3s ease;
+      position: relative;
+      z-index: 1;
     }
-    .note:hover { box-shadow: 0 0 30px rgba(0, 128, 128, 0.5); }
-    .note.visible { transform: scale(1); opacity: 1; }
+    .arena:hover { box-shadow: 0 0 30px rgba(0, 172, 193, 0.6); }
+    .arena.visible { transform: scale(1); opacity: 1; }
     .details-panel {
       position: relative;
-      background: rgba(255, 255, 255, 0.95);
-      border: 1px solid #D4A017;
+      background: #FFFFFF;
+      border: 1px solid #FFD700;
       border-radius: 8px;
       padding: 0;
       max-height: 0;
@@ -58,32 +64,31 @@
       transition: max-height 0.5s ease, padding 0.5s ease;
     }
     .details-panel.open { max-height: 600px; padding: 16px; }
-    .discover-btn {
-      background: #008080;
+    .master-btn {
+      background: #00ACC1;
       color: white;
       padding: 8px 16px;
       border-radius: 20px;
       transition: transform 0.3s ease;
-      animation: glow 2s ease-in-out infinite;
+      animation: kick 2s ease-in-out infinite;
     }
-    .discover-btn:hover { transform: scale(1.1); }
-    @keyframes glow { 0%, 100% { box-shadow: 0 0 5px rgba(0, 128, 128, 0.5); } 50% { box-shadow: 0 0 15px rgba(0, 128, 128, 0.8); } }
+    .master-btn:hover { transform: scale(1.1); }
+    @keyframes kick { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
     .nav-bar {
       position: fixed;
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
+      top: 0;
+      left: 0;
+      right: 0;
       background: rgba(255, 255, 255, 0.9);
-      border-radius: 10px;
-      padding: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      padding: 10px 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
       z-index: 10;
     }
-    .nav-bar a.active i { color: #D4A017; transform: scale(1.2); }
-    .music-icon {
+    .nav-bar a.active { color: #FFD700; border-bottom: 2px solid #FFD700; }
+    .tkd-icon {
       width: 50px;
       height: 50px;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23008080" d="M12 3v10.55A4 4 0 0 0 8 17a4 4 0 0 0 4 4 4 4 0 0 0 4-4V7h4V3h-8z"/></svg>') no-repeat center;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%2300ACC1" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/><path fill="%23FFD700" d="M12 6l3 6h-6l3-6z"/></svg>') no-repeat center;
       background-size: contain;
     }
   </style>
@@ -95,64 +100,65 @@
 
     const NavBar = ({ activeSection, setActiveSection }) => (
       <div className="nav-bar">
-        {[
-          { id: 'intro', icon: 'fa-music', label: 'Prelude' },
-          { id: 'about', icon: 'fa-user', label: 'About' },
-          { id: 'education', icon: 'fa-graduation-cap', label: 'Education' },
-          { id: 'skills', icon: 'fa-tools', label: 'Skills' },
-          { id: 'experience', icon: 'fa-briefcase', label: 'Experience' },
-          { id: 'projects', icon: 'fa-star', label: 'Projects' },
-          { id: 'certifications', icon: 'fa-trophy', label: 'Certifications' }
-        ].map(item => (
-          <a
-            key={item.id}
-            href={`#${item.id}`}
-            className="block p-2 relative group"
-            onClick={(e) => {
-              e.preventDefault();
-              setActiveSection(item.id);
-              const element = document.getElementById(item.id);
-              if (element) {
-                window.scrollTo({ top: element.offsetTop - 80, behavior: 'smooth' });
-              }
-            }}
-          >
-            <i className={`fas ${item.icon} text-teal-600 group-hover:text-gold ${activeSection === item.id ? 'active' : ''}`}></i>
-            <span className="absolute left-full ml-2 bg-teal-600 text-white px-2 py-1 rounded text-sm opacity-0 group-hover:opacity-100 transition-opacity">{item.label}</span>
-          </a>
-        ))}
+        <div className="container mx-auto px-4 flex justify-center space-x-6">
+          {[
+            { id: 'intro', label: 'Welcome' },
+            { id: 'about', label: 'About' },
+            { id: 'education', label: 'Education' },
+            { id: 'skills', label: 'Skills' },
+            { id: 'experience', label: 'Experience' },
+            { id: 'projects', label: 'Projects' },
+            { id: 'certifications', label: 'Certifications' }
+          ].map(item => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className={`text-blue-800 hover:text-gold transition-colors ${activeSection === item.id ? 'active' : ''}`}
+              onClick={(e) => {
+                e.preventDefault();
+                setActiveSection(item.id);
+                const element = document.getElementById(item.id);
+                if (element) {
+                  window.scrollTo({ top: element.offsetTop - 80, behavior: 'smooth' });
+                }
+              }}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
       </div>
     );
 
-    const Movement = ({ id, title, teaser, content, setActiveSection }) => {
+    const Arena = ({ id, title, teaser, content, setActiveSection }) => {
       const [isOpen, setIsOpen] = useState(false);
-      const noteRef = useRef(null);
+      const arenaRef = useRef(null);
 
       useEffect(() => {
         const observer = new IntersectionObserver(
           ([entry]) => {
             if (entry.isIntersecting) {
-              noteRef.current.classList.add('visible');
+              arenaRef.current.classList.add('visible');
               setActiveSection(id);
             }
           },
           { threshold: 0.5 }
         );
-        observer.observe(noteRef.current);
+        observer.observe(arenaRef.current);
         return () => observer.disconnect();
       }, [id, setActiveSection]);
 
       return (
         <div id={id} className="my-12">
-          <div ref={noteRef} className="note mx-auto">
-            <div className="music-icon mb-4"></div>
-            <h2 className="text-2xl font-bold text-teal-600 text-center">{title}</h2>
+          <div ref={arenaRef} className="arena mx-auto">
+            <div className="tkd-icon mb-4"></div>
+            <h2 className="text-2xl font-bold text-blue-800 text-center">{title}</h2>
             <p className="text-gray-600 text-center mt-2">{teaser}</p>
             <button
-              className="discover-btn mt-4"
+              className="master-btn mt-4"
               onClick={() => setIsOpen(!isOpen)}
             >
-              {isOpen ? 'Close' : 'Discover'}
+              {isOpen ? 'Close' : 'Master This'}
             </button>
           </div>
           <div className={`details-panel mx-auto max-w-2xl mt-4 ${isOpen ? 'open' : ''}`}>
@@ -168,31 +174,31 @@
       const sections = [
         {
           id: 'about',
-          title: 'Opening Movement',
-          teaser: 'The melody that defines my data journey.',
+          title: 'Champion’s Arena',
+          teaser: 'Meet the taekwondo star mastering data.',
           content: (
             <>
               <p>
-                I’m Monisha Murali, a data analyst with a Master’s in Information Systems (GPA: 3.85/4.0) from Northwest Missouri State University. My craft orchestrates insights using Power BI, Python, and SQL, harmonizing raw data into meaningful compositions.
+                I’m Monisha Murali, an international-level taekwondo champion and data analyst with a Master’s in Information Systems (GPA: 3.85/4.0) from Northwest Missouri State University. My taekwondo-honed discipline drives my precision in data analysis, delivering impactful insights with Power BI, Python, and SQL.
               </p>
-              <a href="/Monisha_Murali_Resume.pdf" download className="mt-4 inline-block bg-gold text-black px-6 py-2 rounded hover:bg-yellow-400 transition">Download Composition</a>
+              <a href="/Monisha_Murali_Resume.pdf" download className="mt-4 inline-block bg-gold text-blue-800 px-6 py-2 rounded hover:bg-yellow-400 transition">Download Profile</a>
               <p className="mt-2">
-                Email: <a href="mailto:monishagowda685@gmail.com" className="text-teal-600">monishagowda685@gmail.com</a> | 
-                LinkedIn: <a href="https://linkedin.com/in/monishamurali" className="text-teal-600">monishamurali</a>
+                Email: <a href="mailto:monishagowda685@gmail.com" className="text-blue-800">monishagowda685@gmail.com</a> | 
+                LinkedIn: <a href="https://linkedin.com/in/monishamurali" className="text-blue-800">monishamurali</a>
               </p>
             </>
           )
         },
         {
           id: 'education',
-          title: 'Learning Crescendo',
-          teaser: 'The notes that built my foundation.',
+          title: 'Training Arena',
+          teaser: 'Where skills were sharpened with focus.',
           content: (
             <>
-              <h3 className="text-xl font-semibold text-teal-600">Northwest Missouri State University, MO</h3>
+              <h3 className="text-xl font-semibold text-blue-800">Northwest Missouri State University, MO</h3>
               <p>Master’s in Information Systems (GPA: 3.85/4.0) | Jan 2024 - May 2025</p>
               <p>Courses: Database Design, Business Intelligence, Project Management</p>
-              <h3 className="text-xl font-semibold text-teal-600 mt-4">Acharya Institute of Technology, India</h3>
+              <h3 className="text-xl font-semibold text-blue-800 mt-4">Acharya Institute of Technology, India</h3>
               <p>Bachelor’s in Engineering | Aug 2018 - Jul 2022</p>
               <p>Best Outgoing Student</p>
             </>
@@ -200,24 +206,24 @@
         },
         {
           id: 'skills',
-          title: 'Technical Harmony',
-          teaser: 'Instruments in my analytical orchestra.',
+          title: 'Technique Arena',
+          teaser: 'Mastered tools for data precision.',
           content: (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <h4 className="font-semibold text-teal-600">Analysis & Visualization</h4>
+                <h4 className="font-semibold text-blue-800">Analysis & Visualization</h4>
                 <p>Power BI, Tableau, Excel, Google Analytics, Looker, Alteryx, Matplotlib</p>
               </div>
               <div>
-                <h4 className="font-semibold text-teal-600">Programming</h4>
+                <h4 className="font-semibold text-blue-800">Programming</h4>
                 <p>SQL, Python, R</p>
               </div>
               <div>
-                <h4 className="font-semibold text-teal-600">Database</h4>
+                <h4 className="font-semibold text-blue-800">Database</h4>
                 <p>MySQL, Oracle, NoSQL, SQLAlchemy, Snowflake</p>
               </div>
               <div>
-                <h4 className="font-semibold text-teal-600">Cloud & DevOps</h4>
+                <h4 className="font-semibold text-blue-800">Cloud & DevOps</h4>
                 <p>AWS, GCP, Git/GitHub, Jira</p>
               </div>
             </div>
@@ -225,18 +231,18 @@
         },
         {
           id: 'experience',
-          title: 'Performance Highlights',
-          teaser: 'Key compositions from my career.',
+          title: 'Sparring Arena',
+          teaser: 'Victories in real-world data challenges.',
           content: (
             <>
-              <h3 className="text-xl font-semibold text-teal-600">Data Analyst, Northwest Missouri State University</h3>
+              <h3 className="text-xl font-semibold text-blue-800">Data Analyst, Northwest Missouri State University</h3>
               <p>May 2024 - Present</p>
               <ul className="list-disc pl-5">
                 <li>Reduced delays by 12% with trend analysis</li>
                 <li>Improved forecasting by 20% using AI</li>
                 <li>Enhanced decisions by 35% with Power BI</li>
               </ul>
-              <h3 className="text-xl font-semibold text-teal-600 mt-4">Business Intelligence Analyst, Accenture</h3>
+              <h3 className="text-xl font-semibold text-blue-800 mt-4">Business Intelligence Analyst, Accenture</h3>
               <p>Aug 2022 - Dec 2023</p>
               <ul className="list-disc pl-5">
                 <li>Built 50+ Tableau dashboards</li>
@@ -248,20 +254,20 @@
         },
         {
           id: 'projects',
-          title: 'Signature Compositions',
-          teaser: 'Masterworks crafted with data.',
+          title: 'Signature Arena',
+          teaser: 'Showcase moves that transformed data.',
           content: (
             <div className="space-y-4">
               <div>
-                <h4 className="font-semibold text-teal-600">Sales Performance Dashboard</h4>
+                <h4 className="font-semibold text-blue-800">Sales Performance Dashboard</h4>
                 <p>Increased closures by 15%, reduced stock-outs by 30%. (Tech: Power BI, Python, SQL)</p>
               </div>
               <div>
-                <h4 className="font-semibold text-teal-600">Vehicle Data System</h4>
+                <h4 className="font-semibold text-blue-800">Vehicle Data System</h4>
                 <p>Flask app for 120+ vehicles, improved accuracy by 25%. (Tech: Flask, Python, SQLAlchemy)</p>
               </div>
               <div>
-                <h4 className="font-semibold text-teal-600">Rocket Recommender</h4>
+                <h4 className="font-semibold text-blue-800">Rocket Recommender</h4>
                 <p>E-commerce insights. (Tech: Python, Matplotlib, Scikit-learn)</p>
               </div>
             </div>
@@ -269,8 +275,8 @@
         },
         {
           id: 'certifications',
-          title: 'Encore Accolades',
-          teaser: 'Recognitions of my data symphony.',
+          title: 'Victory Arena',
+          teaser: 'Honors earned through data mastery.',
           content: (
             <ul className="list-disc pl-5">
               <li>Microsoft Certified Power BI Data Analyst Associate</li>
@@ -283,26 +289,25 @@
 
       return (
         <div className="relative min-h-screen">
-          <div className="symphony-bg">
-            <div className="staff-lines"></div>
-          </div>
+          <div className="arena-bg"></div>
+          <div className="belt-path"></div>
           <NavBar activeSection={activeSection} setActiveSection={setActiveSection} />
           <div id="intro" className="h-screen flex flex-col items-center justify-center text-center text-gray-800">
-            <h1 className="text-5xl font-bold text-teal-600">Monisha Murali's Data Symphony</h1>
-            <p className="text-xl mt-4 max-w-md text-gray-600">Conduct a journey through my data-driven compositions</p>
+            <h1 className="text-5xl font-bold text-blue-800">Monisha Murali's Taekwondo Data Arena</h1>
+            <p className="text-xl mt-4 max-w-md text-gray-600">Step into my training ground where taekwondo agility meets data excellence</p>
             <a
               href="#about"
-              className="mt-6 bg-teal-600 text-white px-8 py-3 rounded-full hover:bg-teal-500 transition"
+              className="mt-6 bg-blue-800 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition"
               onClick={() => {
                 setActiveSection('about');
                 window.scrollTo({ top: document.getElementById('about').offsetTop - 80, behavior: 'smooth' });
               }}
             >
-              Begin Symphony
+              Enter Arena
             </a>
           </div>
           {sections.map(section => (
-            <Movement
+            <Arena
               key={section.id}
               id={section.id}
               title={section.title}
@@ -311,7 +316,7 @@
               setActiveSection={setActiveSection}
             />
           ))}
-          <footer className="bg-teal-600 text-white py-6 text-center">
+          <footer className="bg-blue-800 text-white py-6 text-center">
             <p>© 2025 Monisha Murali. All rights reserved.</p>
           </footer>
         </div>
