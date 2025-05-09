@@ -1,524 +1,367 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Monisha Murali - Data Analyst Portfolio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monisha Murali - Data Cosmos Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.2/dist/vanilla-tilt.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.20.6/babel.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body {
-      background: #0a0a23;
-      color: #ffffff;
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-      position: relative;
-      margin: 0;
-    }
-    .section {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 4rem 2rem;
-      position: relative;
-      z-index: 1;
-      transition: background 2s ease;
-    }
-    #particles-js {
+    body { font-family: 'Nunito', sans-serif; margin: 0; overflow-x: hidden; }
+    h1, h2, h3 { font-family: 'Orbitron', sans-serif; }
+    .cosmos-bg {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 0;
-      opacity: 0.3;
+      background: linear-gradient(180deg, #0A0E2B 0%, #1C2526 100%);
+      z-index: -1;
+      overflow: hidden;
     }
-    .navbar {
-      background: rgba(10, 10, 35, 0.8);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="10" cy="10" r="2" fill="white" opacity="0.7"/><circle cx="50" cy="50" r="1.5" fill="white" opacity="0.5"/><circle cx="90" cy="90" r="2" fill="white" opacity="0.6"/></svg>') repeat;
+      animation: twinkle 5s linear infinite;
     }
-    .heading {
-      font-family: 'Orbitron', sans-serif;
-      color: #ffd700;
+    @keyframes twinkle { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+    .data-trail {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="none" stroke="rgba(20,184,166,0.4)" stroke-width="3" d="M0,160C240,80,480,240,720,160C960,80,1200,240,1440,160"></path></svg>') repeat-x;
+      animation: trail 10s linear infinite;
     }
-    .subtle-glow {
-      box-shadow: 0 0 10px rgba(192, 192, 192, 0.3), 0 0 20px rgba(192, 192, 192, 0.2);
-      transition: all 0.3s ease;
-    }
-    .subtle-glow:hover {
-      box-shadow: 0 0 20px rgba(192, 192, 192, 0.5), 0 0 30px rgba(192, 192, 192, 0.4);
-    }
-    .card {
-      background: rgba(26, 26, 61, 0.9);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: all 0.3s ease;
-    }
-    .skill-circle, .exp-card {
-      opacity: 0;
-      animation: fadeIn 0.5s ease forwards;
-      animation-delay: calc(var(--index) * 0.1s);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .skill-circle:hover, .exp-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(192, 192, 192, 0.5);
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateX(-20px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-    .project-card {
-      transition: all 0.3s ease;
-    }
-    .error-fallback, .static-fallback {
-      text-align: center;
-      padding: 2rem;
-      color: #ff6b6b;
-    }
-    .static-fallback {
-      color: #ffffff;
-    }
-    .static-fallback a {
-      color: #ffd700;
-      text-decoration: underline;
-    }
-    .static-fallback a:hover {
-      color: #ffeb3b;
-    }
-    #home { background: linear-gradient(45deg, #0a0a23, #1a1a3d); }
-    #experience { background: linear-gradient(45deg, #1a1a3d, #0a0a23); }
-    #projects { background: linear-gradient(45deg, #0a0a23, #1a1a3d); }
-    #skills { background: linear-gradient(45deg, #1a1a3d, #0a0a23); }
-    #contact { background: linear-gradient(45deg, #0a0a23, #1a1a3d); }
-    canvas#cursor-trail {
-      position: fixed;
+    @keyframes trail { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .path {
+      position: absolute;
+      left: 50%;
       top: 0;
-      left: 0;
-      pointer-events: none;
-      z-index: 9999;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to top, #14B8A6, transparent);
+      transform: translateX(-50%);
     }
+    .rocket {
+      position: absolute;
+      left: 50%;
+      width: 30px;
+      height: 50px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 50"><path fill="%2314B8A6" d="M15 0C10 10 5 20 5 30C5 40 10 50 15 50C20 50 25 40 25 30C25 20 20 10 15 0Z"/><path fill="%23C0C0C0" d="M10 40L15 50L20 40H10Z"/></svg>') no-repeat center;
+      transform: translateX(-50%);
+      transition: bottom 0.5s ease;
+    }
+    .rocket-trail {
+      position: absolute;
+      left: 50%;
+      width: 4px;
+      background: linear-gradient(to bottom, #14B8A6, transparent);
+      transform: translateX(-50%);
+      animation: flicker 1s ease-in-out infinite;
+    }
+    @keyframes flicker { 0%, 100% { opacity: 0.5; } 50% { opacity: 0.8; } }
+    .constellation {
+      width: 50px;
+      height: 50px;
+      background: radial-gradient(circle, #C0C0C0 10%, transparent 70%);
+      border-radius: 50%;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      cursor: pointer;
+      transition: transform 0.3s;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    .constellation:hover { transform: translateX(-50%) scale(1.2); }
+    @keyframes pulse { 0%, 100% { transform: translateX(-50%) scale(1); } 50% { transform: translateX(-50%) scale(1.1); } }
+    .tooltip {
+      position: absolute;
+      left: 60px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(20, 184, 166, 0.8);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      animation: fade 1.5s ease-in-out infinite;
+      white-space: nowrap;
+    }
+    @keyframes fade { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+    .card {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.7s ease, opacity 0.7s ease;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 20px rgba(20, 184, 166, 0.5);
+      opacity: 0;
+      border: 1px solid #14B8A6;
+    }
+    .card.open { max-height: 700px; opacity: 1; }
+    .nav-panel {
+      position: fixed;
+      right: 20px;
+      top: 20px;
+      background: rgba(10, 14, 43, 0.8);
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 0 15px rgba(20, 184, 166, 0.5);
+      z-index: 10;
+    }
+    .nav-panel a.active i { color: #C0C0C0; transform: scale(1.2); }
   </style>
 </head>
 <body>
-  <div id="particles-js"></div>
-  <canvas id="cursor-trail"></canvas>
   <div id="root"></div>
-  <div id="static-fallback" style="display: none;">
-    <div class="static-fallback">
-      <h1>Monisha Murali - Data Analyst Portfolio</h1>
-      <p>Failed to load dynamic content. Here’s a static version of my portfolio.</p>
-      <h2>About Me</h2>
-      <p>Data Analyst with 2+ years of experience in data engineering, Snowflake migrations, and Power BI dashboards.</p>
-      <h2>Experience</h2>
-      <p><strong>Data Engineer, Northwest Missouri State University (May 2024 - Present)</strong></p>
-      <p>Migrated 3-4 TB to Snowflake, improved query performance by 90%.</p>
-      <p><strong>Data Engineer Intern, Accenture, Bangalore (Aug 2022 - Dec 2023)</strong></p>
-      <p>Moved 50+ TB to Snowflake, built 5+ Power BI dashboards.</p>
-      <h2>Projects</h2>
-      <p><strong>Cloud-Native Battery Sensor Pipeline:</strong> Processed 500K+ records with AWS S3 and Databricks.</p>
-      <p><strong>Student Services Power BI Dashboard:</strong> Built 15+ filterable views, improved resolution rates by 12%.</p>
-      <h2>Contact</h2>
-      <p>Email: monishagowda685@gmail.com | Phone: (660) 528-8973</p>
-      <p>LinkedIn: <a href="https://linkedin.com/in/monishamurali">monishamurali</a></p>
-    </div>
-  </div>
   <script type="text/babel">
-    const { useEffect, useRef } = React;
+    const { useState, useEffect } = React;
 
-    // Error Boundary Component
-    class ErrorBoundary extends React.Component {
-      state = { hasError: false };
-      static getDerivedStateFromError(error) {
-        console.error('Error in React render:', error);
-        return { hasError: true };
-      }
-      render() {
-        if (this.state.hasError) {
-          return (
-            <div className="error-fallback">
-              <h1>Oops! Something went wrong.</h1>
-              <p>Please check the console for errors or contact monishagowda685@gmail.com.</p>
-            </div>
-          );
-        }
-        return this.props.children;
-      }
-    }
-
-    const Navbar = () => (
-      <nav className="fixed top-0 w-full navbar z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center">
-              <span className="text-2xl font-bold heading">Monisha Murali</span>
-            </div>
-            <div className="flex items-center space-x-4">
-              {['Home', 'Experience', 'Projects', 'Skills', 'Contact'].map((item) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  className="text-gray-300 hover:text-gold-400 transition px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  {item}
-                </a>
-              ))}
-              <a
-                href="https://gray-abbe-88.tiiny.site"
-                download="Monisha_Murali_Resume.pdf"
-                className="text-white bg-blue-800 hover:bg-blue-900 px-3 py-2 rounded-md text-sm font-medium subtle-glow"
-              >
-                Download Resume
-              </a>
-            </div>
-          </div>
-        </div>
-      </nav>
-    );
-
-    const Hero = () => (
-      <div id="home" className="section">
-        <div className="text-center">
-          <h1 className="text-5xl md:text-7xl font-extrabold heading animate-pulse">
-            Monisha Murali
-          </h1>
-          <p className="mt-4 text-xl md:text-2xl text-gray-300">
-            Data Analyst | Snowflake Expert | Power BI Specialist
-          </p>
-          <p className="mt-2 max-w-2xl mx-auto text-gray-400">
-            Transforming data into actionable insights with 2+ years of experience.
-          </p>
+    const NavPanel = ({ activeSection, setActiveSection }) => (
+      <div className="nav-panel">
+        {[
+          { id: 'intro', icon: 'fa-rocket', label: 'Launch' },
+          { id: 'about', icon: 'fa-user-astronaut', label: 'About' },
+          { id: 'education', icon: 'fa-graduation-cap', label: 'Education' },
+          { id: 'skills', icon: 'fa-tools', label: 'Skills' },
+          { id: 'experience', icon: 'fa-briefcase', label: 'Experience' },
+          { id: 'projects', icon: 'fa-project-diagram', label: 'Projects' },
+          { id: 'certifications', icon: 'fa-certificate', label: 'Certifications' }
+        ].map(item => (
           <a
-            href="#contact"
-            className="mt-6 inline-block px-6 py-3 bg-blue-800 text-white rounded-full subtle-glow"
+            key={item.id}
+            href={`#${item.id}`}
+            className="block p-2 relative group"
+            onClick={(e) => {
+              e.preventDefault();
+              setActiveSection(item.id);
+              const element = document.getElementById(item.id);
+              if (element) {
+                window.scrollTo({ top: element.offsetTop - 100, behavior: 'smooth' });
+              }
+            }}
           >
-            Let’s Connect
+            <i className={`fas ${item.icon} text-teal-400 group-hover:text-silver ${activeSection === item.id ? 'active' : ''}`}></i>
+            <span className="absolute left-full ml-2 bg-teal-900 text-white px-2 py-1 rounded text-sm opacity-0 group-hover:opacity-100 transition-opacity">{item.label}</span>
           </a>
-        </div>
+        ))}
       </div>
     );
 
-    const Experience = () => {
-      const expRef = useRef(null);
-      useEffect(() => {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                console.log('Experience section in view');
-                entry.target.querySelectorAll('.exp-card').forEach((el, index) => {
-                  el.style.setProperty('--index', index);
-                  el.style.animationPlayState = 'running';
-                });
-                observer.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.1 }
-        );
-        if (expRef.current) {
-          observer.observe(expRef.current);
-        }
-        return () => {
-          if (expRef.current) observer.unobserve(expRef.current);
-        };
-      }, []);
+    const Constellation = ({ id, title, children, setActiveSection, rocketY, setRocketY, index }) => {
+      const [isOpen, setIsOpen] = useState(false);
+      const yPosition = window.innerHeight - 200 - index * 300; // Adjusted for upward movement
+
       return (
-        <div id="experience" className="section">
-          <div className="max-w-4xl">
-            <h2 className="text-4xl font-bold heading mb-8">Experience</h2>
-            <div ref={expRef} className="space-y-8">
-              <div className="card exp-card p-6 rounded-lg subtle-glow">
-                <h3 className="text-2xl font-semibold text-gray-200">Data Engineer</h3>
-                <p className="text-gray-400">Northwest Missouri State University | May 2024 - Present</p>
-                <ul className="mt-4 list-disc list-inside text-gray-300 space-y-2">
-                  <li>Migrated 3-4 TB to Snowflake, improving query performance by 90%.</li>
-                  <li>Revamped ETL with AWS Glue & Airflow, reducing processing time by 60%.</li>
-                  <li>Optimized 10+ BigQuery views, cutting dashboard load times by 40%.</li>
-                </ul>
-              </div>
-              <div className="card exp-card p-6 rounded-lg subtle-glow">
-                <h3 className="text-2xl font-semibold text-gray-200">Data Engineer Intern</h3>
-                <p className="text-gray-400">Accenture, Bangalore | Aug 2022 - Dec 2023</p>
-                <ul className="mt-4 list-disc list-inside text-gray-300 space-y-2">
-                  <li>Migrated 50+ TB to Snowflake, enhancing data accessibility by 60%.</li>
-                  <li>Designed enterprise data warehouse using Kimball’s modeling.</li>
-                  <li>Built 5+ Power BI dashboards, speeding up reports by 40%.</li>
-                </ul>
-              </div>
-            </div>
+        <div className="relative" id={id} style={{ height: '300px' }}>
+          <div
+            className="constellation"
+            style={{ bottom: `${window.innerHeight - yPosition}px` }}
+            onClick={() => {
+              setIsOpen(true);
+              setActiveSection(id);
+              setRocketY(yPosition);
+              window.scrollTo({ top: document.getElementById(id).offsetTop - 100, behavior: 'smooth' });
+            }}
+          >
+            <span className="tooltip">Click to Explore</span>
+          </div>
+          <div className={`card p-6 rounded-lg mt-4 mx-auto max-w-2xl text-white ${isOpen ? 'open' : ''}`}>
+            <h2 className="text-2xl font-bold text-teal-400">{title}</h2>
+            {children}
           </div>
         </div>
       );
     };
-
-    const Projects = () => {
-      const projectRef = useRef(null);
-      const projects = [
-        {
-          title: "Cloud-Native Battery Sensor Pipeline",
-          desc: "Processed 500K+ sensor records with AWS S3, Databricks, and Power BI dashboards to monitor thermal trends.",
-        },
-        {
-          title: "Student Services Power BI Dashboard",
-          desc: "Built 15+ filterable views, improving resolution rates by 12% using Pandas and SQL.",
-        },
-        {
-          title: "Real-Time Sales Forecasting Pipeline",
-          desc: "Developed an ETL pipeline using AWS Glue and Python to ingest sales data, enabling real-time forecasting with 92% accuracy.",
-        },
-        {
-          title: "Customer Segmentation Dashboard",
-          desc: "Created a Tableau dashboard to segment customers based on purchasing behavior, driving a 15% increase in targeted marketing ROI.",
-        },
-      ];
-      useEffect(() => {
-        const cards = projectRef.current.children;
-        gsap.to(cards, {
-          x: "-100%",
-          duration: 20,
-          repeat: -1,
-          ease: "linear",
-          modifiers: {
-            x: gsap.utils.unitize(x => parseFloat(x) % (cards.length * 100), "%"),
-          },
-        });
-        Array.from(cards).forEach(card => {
-          VanillaTilt.init(card, {
-            max: 10,
-            speed: 400,
-            glare: true,
-            "max-glare": 0.3,
-          });
-        });
-      }, []);
-      return (
-        <div id="projects" className="section">
-          <div className="max-w-6xl">
-            <h2 className="text-4xl font-bold heading mb-8">Projects</h2>
-            <div className="relative overflow-hidden">
-              <div ref={projectRef} className="flex" style={{ width: `${projects.length * 100}%` }}>
-                {projects.map((project, index) => (
-                  <div key={index} className="card project-card p-6 rounded-lg w-1/4 mx-2 subtle-glow">
-                    <h3 className="text-xl font-semibold text-gray-200">{project.title}</h3>
-                    <p className="mt-2 text-gray-400">{project.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      );
-    };
-
-    const Skills = () => {
-      const skills = [
-        { name: 'SQL', level: 95, desc: 'Optimized 10+ BigQuery views' },
-        { name: 'Python', level: 90, desc: 'Scripted ETL pipelines' },
-        { name: 'Snowflake', level: 85, desc: 'Migrated 50+ TB data' },
-        { name: 'Power BI', level: 80, desc: 'Built 5+ dashboards' },
-        { name: 'AWS', level: 75, desc: 'Used Glue & S3' },
-        { name: 'BigQuery', level: 70, desc: 'Slashed load times 40%' },
-      ];
-      const skillRef = useRef(null);
-      useEffect(() => {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                console.log('Skills section in view');
-                entry.target.querySelectorAll('.skill-circle').forEach((el, index) => {
-                  el.style.setProperty('--index', index);
-                  el.style.animationPlayState = 'running';
-                });
-                observer.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.1 }
-        );
-        if (skillRef.current) {
-          observer.observe(skillRef.current);
-        }
-        return () => {
-          if (skillRef.current) observer.unobserve(skillRef.current);
-        };
-      }, []);
-      return (
-        <div id="skills" className="section">
-          <div className="max-w-5xl">
-            <h2 className="text-4xl font-bold heading mb-8">Skills</h2>
-            <div ref={skillRef} className="grid grid-cols-2 md:grid-cols-3 gap-6">
-              {skills.map((skill, index) => {
-                console.log('Rendering skill:', skill.name);
-                return (
-                  <div key={skill.name} className="skill-circle text-center">
-                    <div className="relative w-32 h-32 mx-auto">
-                      <svg className="w-full h-full" viewBox="0 0 36 36">
-                        <path
-                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                          fill="none"
-                          stroke="#444"
-                          strokeWidth="1"
-                        />
-                        <path
-                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                          fill="none"
-                          stroke="#1e90ff"
-                          strokeWidth="2"
-                          strokeDasharray={`${skill.level}, 100`}
-                        />
-                      </svg>
-                      <div className="absolute inset-0 flex items-center justify-center text-xl font-bold">
-                        {skill.level}%
-                      </div>
-                    </div>
-                    <p className="mt-2 text-gray-300">{skill.name}</p>
-                    <p className="text-sm text-gray-400">{skill.desc}</p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      );
-    };
-
-    const Contact = () => (
-      <div id="contact" className="section">
-        <div className="max-w-md text-center">
-          <h2 className="text-4xl font-bold heading mb-8">Contact</h2>
-          <p className="text-gray-300">Ready to dive into data-driven solutions?</p>
-          <div className="mt-6 space-y-4">
-            <p className="text-gray-400"><strong>Email:</strong> monishagowda685@gmail.com</p>
-            <p className="text-gray-400"><strong>Phone:</strong> (660) 528-8973</p>
-            <p className="text-gray-400">
-              <strong>LinkedIn:</strong>{' '}
-              <a href="https://linkedin.com/in/monishamurali" className="text-gold-400 hover:underline">
-                monishamurali
-              </a>
-            </p>
-          </div>
-        </div>
-      </div>
-    );
 
     const App = () => {
-      useEffect(() => {
-        gsap.registerPlugin(ScrollTrigger);
-        console.log('App mounted');
-        try {
-          particlesJS('particles-js', {
-            particles: {
-              number: { value: 50, density: { enable: true, value_area: 800 } },
-              color: { value: '#1e90ff' },
-              shape: { type: 'circle' },
-              opacity: { value: 0.3, random: true },
-              size: { value: 2, random: true },
-              line_linked: { enable: true, distance: 150, color: '#1e90ff', opacity: 0.2, width: 1 },
-              move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out' },
-            },
-            interactivity: {
-              detect_on: 'canvas',
-              events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' }, resize: true },
-              modes: { grab: { distance: 200, line_linked: { opacity: 0.5 } }, push: { particles_nb: 2 } },
-            },
-            retina_detect: true,
-          });
-          console.log('Particles initialized');
-        } catch (error) {
-          console.error('Particles init error:', error);
-        }
+      const [activeSection, setActiveSection] = useState('intro');
+      const [rocketY, setRocketY] = useState(window.innerHeight - 200);
 
-        // Subtle Cursor Trail
-        const canvas = document.getElementById('cursor-trail');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        const particlesArray = [];
-        class Particle {
-          constructor(x, y) {
-            this.x = x;
-            this.y = y;
-            this.size = Math.random() * 3 + 1;
-            this.life = 15;
-            this.color = '#1e90ff';
-          }
-          draw() {
-            ctx.fillStyle = this.color;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
-          }
-          update() {
-            this.life--;
-            this.size -= 0.1;
-          }
-        }
-        let mouseX = 0, mouseY = 0;
-        window.addEventListener('mousemove', (e) => {
-          mouseX = e.clientX;
-          mouseY = e.clientY;
-          for (let i = 0; i < 2; i++) {
-            particlesArray.push(new Particle(mouseX, mouseY));
-          }
-        });
-        function animate() {
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          for (let i = particlesArray.length - 1; i >= 0; i--) {
-            particlesArray[i].draw();
-            particlesArray[i].update();
-            if (particlesArray[i].life <= 0 || particlesArray[i].size <= 0) {
-              particlesArray.splice(i, 1);
-            }
-          }
-          requestAnimationFrame(animate);
-        }
-        animate();
-        window.addEventListener('resize', () => {
-          canvas.width = window.innerWidth;
-          canvas.height = window.innerHeight;
-        });
+      useEffect(() => {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                const sectionId = entry.target.id;
+                setActiveSection(sectionId);
+                const index = ['intro', 'about', 'education', 'skills', 'experience', 'projects', 'certifications'].indexOf(sectionId);
+                if (index > 0) {
+                  setRocketY(window.innerHeight - 200 - index * 300);
+                } else if (sectionId === 'intro') {
+                  setRocketY(window.innerHeight - 200);
+                }
+              }
+            });
+          },
+          { threshold: 0.5 }
+        );
+        document.querySelectorAll('div[id]').forEach(el => observer.observe(el));
+
+        return () => observer.disconnect();
       }, []);
+
+      const sections = [
+        {
+          id: 'about',
+          title: 'About Me',
+          content: (
+            <>
+              <p>
+                I'm Monisha Murali, a data analyst with a Master's in Information Systems (GPA: 3.85/4.0). I wield Power BI, Python, and SQL to transform data into stellar insights.
+              </p>
+              <a href="/Monisha_Murali_Resume.pdf" download className="mt-4 inline-block bg-silver text-teal-900 px-6 py-2 rounded hover:bg-gray-300 transition">Download Resume</a>
+              <p className="mt-2">
+                Email: <a href="mailto:monishagowda685@gmail.com" className="text-teal-400">monishagowda685@gmail.com</a> | 
+                LinkedIn: <a href="https://linkedin.com/in/monishamurali" className="text-teal-400">monishamurali</a>
+              </p>
+            </>
+          )
+        },
+        {
+          id: 'education',
+          title: 'Education',
+          content: (
+            <>
+              <h3 className="text-xl font-semibold text-teal-400">Northwest Missouri State University, MO</h3>
+              <p>Master's in Information Systems (GPA: 3.85/4.0) | Jan 2024 - May 2025</p>
+              <p>Courses: Database Design, Business Intelligence, Project Management</p>
+              <h3 className="text-xl font-semibold text-teal-400 mt-4">Acharya Institute of Technology, India</h3>
+              <p>Bachelor's in Engineering | Aug 2018 - Jul 2022</p>
+              <p>Best Outgoing Student</p>
+            </>
+          )
+        },
+        {
+          id: 'skills',
+          title: 'Skills',
+          content: (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <h4 className="font-semibold text-teal-400">Analysis & Visualization</h4>
+                <p>Power BI, Tableau, Excel, Google Analytics, Looker, Alteryx, Matplotlib</p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-teal-400">Programming</h4>
+                <p>SQL, Python, R</p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-teal-400">Database</h4>
+                <p>MySQL, Oracle, NoSQL, SQLAlchemy, Snowflake</p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-teal-400">Cloud & DevOps</h4>
+                <p>AWS, GCP, Git/GitHub, Jira</p>
+              </div>
+            </div>
+          )
+        },
+        {
+          id: 'experience',
+          title: 'Experience',
+          content: (
+            <>
+              <h3 className="text-xl font-semibold text-teal-400">Data Analyst, Northwest Missouri State University</h3>
+              <p>May 2024 - Present</p>
+              <ul className="list-disc pl-5">
+                <li>Reduced delays by 12% with trend analysis</li>
+                <li>Improved forecasting by 20% using AI</li>
+                <li>Enhanced decisions by 35% with Power BI</li>
+              </ul>
+              <h3 className="text-xl font-semibold text-teal-400 mt-4">Business Intelligence Analyst, Accenture</h3>
+              <p>Aug 2022 - Dec 2023</p>
+              <ul className="list-disc pl-5">
+                <li>Built 50+ Tableau dashboards</li>
+                <li>Automated reports, cut time by 60%</li>
+                <li>Optimized processing by 40%</li>
+              </ul>
+            </>
+          )
+        },
+        {
+          id: 'projects',
+          title: 'Projects',
+          content: (
+            <div className="space-y-4">
+              <div>
+                <h4 className="font-semibold text-teal-400">Sales Performance Dashboard</h4>
+                <p>Increased closures by 15%, reduced stock-outs by 30%. (Tech: Power BI, Python, SQL)</p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-teal-400">Vehicle Data System</h4>
+                <p>Flask app for 120+ vehicles, improved accuracy by 25%. (Tech: Flask, Python, SQLAlchemy)</p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-teal-400">Rocket Recommender</h4>
+                <p>E-commerce insights. (Tech: Python, Matplotlib, Scikit-learn)</p>
+              </div>
+            </div>
+          )
+        },
+        {
+          id: 'certifications',
+          title: 'Certifications',
+          content: (
+            <ul className="list-disc pl-5">
+              <li>Microsoft Certified Power BI Data Analyst Associate</li>
+              <li>Google Data Analytics Professional Certificate</li>
+              <li>SQL Advanced Certificate</li>
+            </ul>
+          )
+        }
+      ];
+
       return (
-        <ErrorBoundary>
-          <Navbar />
-          <Hero />
-          <Experience />
-          <Projects />
-          <Skills />
-          <Contact />
-        </ErrorBoundary>
+        <div className="relative min-h-screen">
+          <div className="cosmos-bg">
+            <div className="stars"></div>
+            <div className="data-trail"></div>
+          </div>
+          <div className="path"></div>
+          <div className="rocket" style={{ bottom: `${window.innerHeight - rocketY}px` }}></div>
+          <div className="rocket-trail" style={{ bottom: `${window.innerHeight - rocketY + 50}px`, height: `${rocketY - 50}px` }}></div>
+          <NavPanel activeSection={activeSection} setActiveSection={setActiveSection} />
+          <div id="intro" className="h-screen flex flex-col items-center justify-center text-center text-white">
+            <h1 className="text-5xl font-bold">Monisha Murali's Data Cosmos</h1>
+            <p className="text-xl mt-4 max-w-md">Guide a rocket through the constellations of my data analytics journey</p>
+            <a
+              href="#about"
+              className="mt-6 bg-teal-500 text-white px-8 py-3 rounded-full hover:bg-teal-400 transition"
+              onClick={() => {
+                setActiveSection('about');
+                setRocketY(window.innerHeight - 500);
+                window.scrollTo({ top: document.getElementById('about').offsetTop - 100, behavior: 'smooth' });
+              }}
+            >
+              Launch Mission
+            </a>
+          </div>
+          {sections.map((section, index) => (
+            <Constellation
+              key={section.id}
+              id={section.id}
+              title={section.title}
+              setActiveSection={setActiveSection}
+              rocketY={rocketY}
+              setRocketY={setRocketY}
+              index={index + 1}
+            >
+              {section.content}
+            </Constellation>
+          ))}
+          <footer className="bg-teal-900 text-white py-6 text-center">
+            <p>© 2025 Monisha Murali. All rights reserved.</p>
+          </footer>
+        </div>
       );
     };
 
-    // Check if Babel loaded
-    if (typeof Babel === 'undefined') {
-      console.error('Babel failed to load. Falling back to static content.');
-      document.getElementById('root').style.display = 'none';
-      document.getElementById('static-fallback').style.display = 'block';
-    } else {
-      try {
-        ReactDOM.render(<App />, document.getElementById('root'));
-        console.log('React rendered');
-      } catch (error) {
-        console.error('React render error:', error);
-        document.getElementById('root').innerHTML = `
-          <div class="error-fallback">
-            <h1>Error Loading Portfolio</h1>
-            <p>Please check the console for details or contact monishagowda685@gmail.com.</p>
-          </div>
-        `;
-      }
-    }
+    ReactDOM.render(<App />, document.getElementById('root'));
   </script>
 </body>
 </html>
