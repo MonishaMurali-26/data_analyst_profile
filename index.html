@@ -3,327 +3,535 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Monisha Murali - Taekwondo Data Arena</title>
+  <title>Monisha Murali - Data Analyst Portfolio</title>
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.20.6/babel.min.js"></script>
+  <!-- Google Fonts (Poppins) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Anime.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <!-- Particles.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    body { font-family: 'Lato', sans-serif; margin: 0; overflow-x: hidden; }
-    h1, h2, h3 { font-family: 'Poppins', sans-serif; }
-    .arena-bg {
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #E5E7EB;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .dark-mode {
+      background-color: #1F2937;
+      color: #F3F4F6;
+    }
+    .dark-mode .bg-white { background-color: #374151; }
+    .dark-mode .bg-gray-100 { background-color: #1F2937; }
+    .dark-mode .bg-gray-50 { background-color: #4B5563; }
+    .dark-mode .text-gray-700 { color: #D1D5DB; }
+    .dark-mode .text-gray-600 { color: #9CA3AF; }
+    .animate { opacity: 0; }
+    #scrollProgress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: #00CED1;
+      width: 0;
+      z-index: 50;
+    }
+    .modal {
+      display: none;
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(180deg, #FFFFFF 0%, #E0F7FA 100%);
-      z-index: -1;
-      overflow: hidden;
-    }
-    .belt-path {
-      position: absolute;
-      left: 50%;
-      top: 100vh; /* Start after intro section */
-      bottom: 80px; /* End before footer */
-      width: 4px;
-      background: linear-gradient(to top, #FFD700, #00ACC1);
-      transform: translateX(-50%);
-      animation: pulse 3s ease-in-out infinite;
-      z-index: 0;
-    }
-    @keyframes pulse { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
-    .arena {
-      background: rgba(255, 255, 255, 0.95);
-      border: 3px solid #FFD700;
-      border-radius: 50%;
-      width: 350px;
-      height: 350px;
-      display: flex;
-      flex-direction: column;
+      background: rgba(0, 0, 0, 0.5);
       justify-content: center;
       align-items: center;
-      box-shadow: 0 0 20px rgba(0, 172, 193, 0.3);
-      transform: scale(0.9);
-      opacity: 0;
-      transition: transform 0.5s ease, opacity 0.5s ease, box-shadow 0.3s ease;
-      position: relative;
-      z-index: 1;
+      z-index: 100;
     }
-    .arena:hover { box-shadow: 0 0 30px rgba(0, 172, 193, 0.6); }
-    .arena.visible { transform: scale(1); opacity: 1; }
-    .details-panel {
-      position: relative;
-      background: #FFFFFF;
-      border: 1px solid #FFD700;
+    .modal-content {
+      background: #fff;
+      padding: 20px;
       border-radius: 8px;
-      padding: 0;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.5s ease, padding 0.5s ease;
+      max-width: 600px;
+      width: 90%;
     }
-    .details-panel.open { max-height: 600px; padding: 16px; }
-    .master-btn {
-      background: #00ACC1;
-      color: white;
-      padding: 8px 16px;
-      border-radius: 20px;
-      transition: transform 0.3s ease;
-      animation: kick 2s ease-in-out infinite;
-    }
-    .master-btn:hover { transform: scale(1.1); }
-    @keyframes kick { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-    .nav-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: rgba(255, 255, 255, 0.9);
-      padding: 10px 0;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    .dark-mode .modal-content { background: #374151; color: #F3F4F6; }
+    .tooltip {
+      visibility: hidden;
+      position: absolute;
+      background: #4B0082;
+      color: #fff;
+      padding: 8px;
+      border-radius: 4px;
+      font-size: 12px;
       z-index: 10;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
     }
-    .nav-bar a.active { color: #FFD700; border-bottom: 2px solid #FFD700; }
-    .tkd-icon {
-      width: 50px;
-      height: 50px;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%2300ACC1" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/><path fill="%23FFD700" d="M12 6l3 6h-6l3-6z"/></svg>') no-repeat center;
-      background-size: contain;
+    .skill-card:hover .tooltip { visibility: visible; }
+    canvas { max-width: 100%; }
+    .profile-img {
+      border-radius: 50%;
+      border: 4px solid #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      max-width: 150px;
+      height: auto;
     }
   </style>
 </head>
 <body>
-  <div id="root"></div>
-  <script type="text/babel">
-    const { useState, useEffect, useRef } = React;
+  <!-- Scroll Progress Bar -->
+  <div id="scrollProgress"></div>
 
-    const NavBar = ({ activeSection, setActiveSection }) => (
-      <div className="nav-bar">
-        <div className="container mx-auto px-4 flex justify-center space-x-6">
-          {[
-            { id: 'intro', label: 'Welcome' },
-            { id: 'about', label: 'About' },
-            { id: 'education', label: 'Education' },
-            { id: 'skills', label: 'Skills' },
-            { id: 'experience', label: 'Experience' },
-            { id: 'projects', label: 'Projects' },
-            { id: 'certifications', label: 'Certifications' }
-          ].map(item => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              className={`text-blue-800 hover:text-gold transition-colors ${activeSection === item.id ? 'active' : ''}`}
-              onClick={(e) => {
-                e.preventDefault();
-                setActiveSection(item.id);
-                const element = document.getElementById(item.id);
-                if (element) {
-                  window.scrollTo({ top: element.offsetTop - 80, behavior: 'smooth' });
-                }
-              }}
-            >
-              {item.label}
-            </a>
-          ))}
+  <!-- Dark Mode Toggle -->
+  <button id="darkModeToggle" class="fixed top-4 right-4 bg-indigo-800 text-white p-2 rounded-full hover:bg-indigo-700">
+    <i class="fas fa-moon"></i>
+  </button>
+
+  <!-- Hero Section -->
+  <section id="particles-js" class="relative bg-gradient-to-r from-indigo-800 to-cyan-500 text-white py-10 text-center">
+    <div class="absolute inset-0"></div>
+    <div class="relative z-10">
+      <h1 class="animate text-4xl md:text-5xl font-bold">Monisha Murali</h1>
+      <p class="animate text-xl md:text-2xl mt-2">Data Analyst | Crafting Insights from Data</p>
+      <!-- Graduation Image -->
+      <img src="https://github.com/MonishaMurali-26/data_analyst_profile/blob/main/pic.jpg" alt="Graduation" class="animate profile-img mt-4">
+      <p class="text-sm text-gray-200 mt-2">Replace the src above with the URL of your graduation image (host on GitHub or Imgur).</p>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="py-16 px-4 bg-white">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="animate text-3xl font-bold mb-6 text-indigo-800">About Me</h2>
+      <p class="animate text-lg text-gray-700 mb-6">
+        Results-driven Data Analyst with 2 years of experience in financial reporting, data integration, and dashboard development. Skilled in SQL, Python, Power BI, and Tableau, I excel at transforming complex datasets into actionable insights through advanced visualization, modeling, and automation.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-gray-50 p-4 rounded-lg shadow-md">
+          <p class="text-2xl font-bold text-cyan-500">2+</p>
+          <p class="text-gray-700">Years of Experience</p>
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-md">
+          <p class="text-2xl font-bold text-cyan-500">Expert</p>
+          <p class="text-gray-700">SQL Proficiency</p>
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg shadow-md">
+          <p class="text-2xl font-bold text-cyan-500">Advanced</p>
+          <p class="text-gray-700">Python Proficiency</p>
         </div>
       </div>
-    );
+    </div>
+  </section>
 
-    const Arena = ({ id, title, teaser, content, setActiveSection }) => {
-      const [isOpen, setIsOpen] = useState(false);
-      const arenaRef = useRef(null);
+  <!-- Skills Section -->
+  <section class="py-16 px-4 bg-gray-100">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="animate text-3xl font-bold text-center mb-6 text-indigo-800">Skills</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
+          <i class="fas fa-database text-cyan-500"></i>
+          <span class="text-gray-700">SQL</span>
+          <span class="tooltip">Optimized queries for 40% faster reporting</span>
+        </div>
+        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
+          <i class="fab fa-python text-cyan-500"></i>
+          <span class="text-gray-700">Python</span>
+          <span class="tooltip">Built predictive models and ETL pipelines</span>
+        </div>
+        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
+          <i class="fas fa-chart-bar text-cyan-500"></i>
+          <span class="text-gray-700">Power BI</span>
+          <span class="tooltip">Created real-time KPI dashboards</span>
+        </div>
+        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
+          <i class="fas fa-chart-pie text-cyan-500"></i>
+          <span class="text-gray-700">Tableau</span>
+          <span class="tooltip">Visualized customer segmentation</span>
+        </div>
+        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
+          <i class="fab fa-r-project text-cyan-500"></i>
+          <span class="text-gray-700">R</span>
+          <span class="tooltip">Statistical analysis and forecasting</span>
+        </div>
+        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
+          <i class="fas fa-table text-cyan-500"></i>
+          <span class="text-gray-700">Pandas</span>
+          <span class="tooltip">Data manipulation and cleaning</span>
+        </div>
+        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
+          <i class="fas fa-calculator text-cyan-500"></i>
+          <span class="text-gray-700">NumPy</span>
+          <span class="tooltip">Numerical computations for analytics</span>
+        </div>
+        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
+          <i class="fas fa-book text-cyan-500"></i>
+          <span class="text-gray-700">Jupyter Notebook</span>
+          <span class="tooltip">Interactive data analysis</span>
+        </div>
+        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
+          <i class="fas fa-database text-cyan-500"></i>
+          <span class="text-gray-700">MySQL</span>
+          <span class="tooltip">Managed relational databases</span>
+        </div>
+        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
+          <i class="fas fa-server text-cyan-500"></i>
+          <span class="text-gray-700">Oracle</span>
+          <span class="tooltip">Enterprise database management</span>
+        </div>
+        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
+          <i class="fas fa-cloud text-cyan-500"></i>
+          <span class="text-gray-700">Snowflake</span>
+          <span class="tooltip">Cloud-based data warehousing</span>
+        </div>
+        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
+          <i class="fas fa-fire text-cyan-500"></i>
+          <span class="text-gray-700">Apache Spark</span>
+          <span class="tooltip">Big data processing</span>
+        </div>
+        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
+          <i class="fab fa-aws text-cyan-500"></i>
+          <span class="text-gray-700">AWS</span>
+          <span class="tooltip">Cloud data storage and analytics</span>
+        </div>
+        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
+          <i class="fab fa-google text-cyan-500"></i>
+          <span class="text-gray-700">GCP</span>
+          <span class="tooltip">Cloud-based data pipelines</span>
+        </div>
+        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
+          <i class="fas fa-exchange-alt text-cyan-500"></i>
+          <span class="text-gray-700">ETL Pipelines</span>
+          <span class="tooltip">Streamlined data integration</span>
+        </div>
+        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
+          <i class="fas fa-warehouse text-cyan-500"></i>
+          <span class="text-gray-700">Data Warehousing</span>
+          <span class="tooltip">Designed scalable data storage</span>
+        </div>
+        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
+          <i class="fas fa-project-diagram text-cyan-500"></i>
+          <span class="text-gray-700">Data Modeling</span>
+          <span class="tooltip">Structured data for analysis</span>
+        </div>
+        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
+          <i class="fas fa-broom text-cyan-500"></i>
+          <span class="text-gray-700">Data Cleaning</span>
+          <span class="tooltip">Ensured data quality</span>
+        </div>
+        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
+          <i class="fas fa-chart-line text-cyan-500"></i>
+          <span class="text-gray-700">Statistical Analysis</span>
+          <span class="tooltip">Derived insights from data</span>
+        </div>
+        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
+          <i class="fas fa-brain text-cyan-500"></i>
+          <span class="text-gray-700">Machine Learning Basics</span>
+          <span class="tooltip">Applied clustering and prediction</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      useEffect(() => {
-        const observer = new IntersectionObserver(
-          ([entry]) => {
-            if (entry.isIntersecting) {
-              arenaRef.current.classList.add('visible');
-              setActiveSection(id);
+  <!-- Experience Section -->
+  <section class="py-16 px-4 bg-white">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="animate text-3xl font-bold text-center mb-6 text-indigo-800">Experience</h2>
+      <div class="space-y-4">
+        <div class="animate bg-gray-50 p-6 rounded-lg shadow-md">
+          <button class="w-full text-left text-xl font-semibold text-gray-700 hover:text-indigo-800" onclick="toggleAccordion(this)">Data Analyst</button>
+          <div class="accordion-content hidden">
+            <p class="text-gray-600">Northwest Missouri State University, MO | May 2024 - Present</p>
+            <ul class="list-disc ml-6 mt-2 text-gray-700">
+              <li>Developed trend analysis reports, reducing processing delays by 12%.</li>
+              <li>Built predictive models, improving forecasting accuracy by 20%.</li>
+              <li>Delivered Power BI dashboards, boosting decision-making efficiency by 35%.</li>
+              <li>Streamlined ETL pipelines, increasing data integration speed by 40%.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="animate bg-gray-50 p-6 rounded-lg shadow-md">
+          <button class="w-full text-left text-xl font-semibold text-gray-700 hover:text-indigo-800" onclick="toggleAccordion(this)">Business Intelligence Analyst</button>
+          <div class="accordion-content hidden">
+            <p class="text-gray-600">Accenture, Bangalore, India | Aug 2022 - Dec 2023</p>
+            <ul class="list-disc ml-6 mt-2 text-gray-700">
+              <li>Created 50+ dashboards for KPI monitoring, reducing report delivery time by 60%.</li>
+              <li>Reduced data processing time by 40% using Informatica.</li>
+              <li>Enhanced data workflows, increasing speed by 50%.</li>
+              <li>Built Python-based predictive models for trend forecasting.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section class="py-16 px-4 bg-gray-100">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="animate text-3xl font-bold text-center mb-6 text-indigo-800">Projects</h2>
+      <div class="space-y-8">
+        <div class="animate bg-white p-6 rounded-lg shadow-md flex justify-between items-center">
+          <div>
+            <h3 class="text-xl font-semibold">Sales Performance & Forecasting Dashboard</h3>
+            <p class="text-gray-600">Tech: Power BI, Python, SQL</p>
+            <p class="text-gray-700 mt-2">Increased deal closures by 15% with a sales dashboard. Reduced stock-outs by 30% via demand prediction.</p>
+          </div>
+          <button class="bg-cyan-500 text-white px-4 py-2 rounded hover:bg-cyan-600" onclick="openModal('modal1')">View Details</button>
+        </div>
+        <div class="animate bg-white p-6 rounded-lg shadow-md flex justify-between items-center">
+          <div>
+            <h3 class="text-xl font-semibold">Vehicle Data Management & Reporting System</h3>
+            <p class="text-gray-600">Tech: Flask, Python, SQLAlchemy</p>
+            <p class="text-gray-700 mt-2">Managed data for 120+ vehicles, improving reporting accuracy by 25%.</p>
+          </div>
+          <button class="bg-cyan-500 text-white px-4 py-2 rounded hover:bg-cyan-600" onclick="openModal('modal2')">View Details</button>
+        </div>
+        <div class="animate bg-white p-6 rounded-lg shadow-md flex justify-between items-center">
+          <div>
+            <h3 class="text-xl font-semibold">Customer Segmentation Analysis</h3>
+            <p class="text-gray-600">Tech: Python, Pandas, Tableau</p>
+            <p class="text-gray-700 mt-2">Boosted customer engagement by 18% with clustering and Tableau visualizations.</p>
+          </div>
+          <button class="bg-cyan-500 text-white px-4 py-2 rounded hover:bg-cyan-600" onclick="openModal('modal3')">View Details</button>
+        </div>
+        <div class="animate bg-white p-6 rounded-lg shadow-md flex justify-between items-center">
+          <div>
+            <h3 class="text-xl font-semibold">Financial Reporting Automation</h3>
+            <p class="text-gray-600">Tech: SQL, Python, Excel</p>
+            <p class="text-gray-700 mt-2">Automated reports, reducing generation time by 45%.</p>
+          </div>
+          <button class="bg-cyan-500 text-white px-4 py-2 rounded hover:bg-cyan-600" onclick="openModal('modal4')">View Details</button>
+        </div>
+      </div>
+      <div class="mt-8">
+        <h3 class="text-2xl font-semibold text-center mb-4 text-indigo-800">Key Project Impacts</h3>
+        <canvas id="impactChart" class="mx-auto"></canvas>
+      </div>
+    </div>
+    <!-- Modals -->
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <h3 class="text-xl font-semibold">Sales Performance & Forecasting Dashboard</h3>
+        <p class="text-gray-700 mt-2"><strong>Tech:</strong> Power BI, Python, SQL</p>
+        <p class="text-gray-700 mt-2"><strong>Impact:</strong> Increased deal closures by 15%, reduced stock-outs by 30%, and cut manual processing by 50%.</p>
+        <p class="text-gray-700 mt-2"><strong>Details:</strong> Designed an interactive dashboard to track sales KPIs and implemented a demand prediction model using Python.</p>
+        <button class="bg-indigo-800 text-white px-4 py-2 rounded mt-4 hover:bg-indigo-700" onclick="closeModal('modal1')">Close</button>
+      </div>
+    </div>
+    <div id="modal2" class="modal">
+      <div class="modal-content">
+        <h3 class="text-xl font-semibold">Vehicle Data Management & Reporting System</h3>
+        <p class="text-gray-700 mt-2"><strong>Tech:</strong> Flask, Python, SQLAlchemy</p>
+        <p class="text-gray-700 mt-2"><strong>Impact:</strong> Improved reporting accuracy by 25% for 120+ vehicles.</p>
+        <p class="text-gray-700 mt-2"><strong>Details:</strong> Built a web app to manage vehicle data, with dashboards for fuel efficiency and maintenance trends.</p>
+        <button class="bg-indigo-800 text-white px-4 py-2 rounded mt-4 hover:bg-indigo-700" onclick="closeModal('modal2')">Close</button>
+      </div>
+    </div>
+    <div id="modal3" class="modal">
+      <div class="modal-content">
+        <h3 class="text-xl font-semibold">Customer Segmentation Analysis</h3>
+        <p class="text-gray-700 mt-2"><strong>Tech:</strong> Python, Pandas, Tableau</p>
+        <p class="text-gray-700 mt-2"><strong>Impact:</strong> Increased customer engagement by 18%.</p>
+        <p class="text-gray-700 mt-2"><strong>Details:</strong> Applied clustering algorithms to segment customers and visualized results in Tableau for marketing strategies.</p>
+        <button class="bg-indigo-800 text-white px-4 py-2 rounded mt-4 hover:bg-indigo-700" onclick="closeModal('modal3')">Close</button>
+      </div>
+    </div>
+    <div id="modal4" class="modal">
+      <div class="modal-content">
+        <h3 class="text-xl font-semibold">Financial Reporting Automation</h3>
+        <p class="text-gray-700 mt-2"><strong>Tech:</strong> SQL, Python, Excel</p>
+        <p class="text-gray-700 mt-2"><strong>Impact:</strong> Reduced report generation time by 45%.</p>
+        <p class="text-gray-700 mt-2"><strong>Details:</strong> Automated monthly financial reports with SQL and Python, integrating outputs into Excel.</p>
+        <button class="bg-indigo-800 text-white px-4 py-2 rounded mt-4 hover:bg-indigo-700" onclick="closeModal('modal4')">Close</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education Section -->
+  <section class="py-16 px-4 bg-white">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="animate text-3xl font-bold text-center mb-6 text-indigo-800">Education & Certifications</h2>
+      <div class="space-y-6">
+        <div class="animate bg-gray-50 p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-semibold">Master of Science in Information Systems</h3>
+          <p class="text-gray-600">Northwest Missouri State University, MO | Jan 2024 - May 2025</p>
+        </div>
+        <div class="animate bg-gray-50 p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-semibold">Bachelor's in Engineering</h3>
+          <p class="text-gray-600">Acharya Institute of Technology, India | Aug 2018 - Jul 2022</p>
+        </div>
+        <div class="animate bg-gray-50 p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-semibold">Certifications</h3>
+          <ul class="list-disc ml-6 text-gray-700">
+            <li>Microsoft Certified Power BI Data Analyst Associate</li>
+            <li>Google Data Analytics Professional Certificate</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="py-16 px-4 bg-gray-100 text-center">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="animate text-3xl font-bold mb-6 text-indigo-800">Contact</h2>
+      <p class="animate text-lg text-gray-700 mb-4">Let's connect to explore data analytics opportunities!</p>
+      <div class="flex justify-center space-x-4">
+        <button id="copyEmail" class="animate bg-cyan-500 text-white px-6 py-3 rounded-lg hover:bg-cyan-600 transition flex items-center space-x-2">
+          <i class="fas fa-envelope"></i>
+          <span>Copy Email</span>
+        </button>
+        <a href="https://linkedin.com/in/monishamurali" class="animate bg-indigo-800 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition flex items-center space-x-2">
+          <i class="fab fa-linkedin"></i>
+          <span>LinkedIn</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Particles.js
+      particlesJS('particles-js', {
+        particles: {
+          number: { value: 80, density: { enable: true, value_area: 800 } },
+          color: { value: '#ffffff' },
+          shape: { type: 'circle' },
+          opacity: { value: 0.5, random: true },
+          size: { value: 3, random: true },
+          line_linked: { enable: true, distance: 150, color: '#ffffff', opacity: 0.4, width: 1 },
+          move: { enable: true, speed: 2, direction: 'none', random: true }
+        },
+        interactivity: {
+          detect_on: 'canvas',
+          events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } },
+          modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+        },
+        retina_detect: true
+      });
+
+      // Anime.js Animations
+      anime({
+        targets: '.animate',
+        opacity: [0, 1],
+        translateY: [20, 0],
+        delay: anime.stagger(100),
+        duration: 800,
+        easing: 'easeOutQuad'
+      });
+
+      // Chart.js Horizontal Bar (Fixed Gradient Issue)
+      const ctx = document.getElementById('impactChart').getContext('2d');
+      const gradient = ctx.createLinearGradient(0, 0, 200, 0);
+      gradient.addColorStop(0, '#00CED1');
+      gradient.addColorStop(1, '#4B0082');
+
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Sales Dashboard', 'Vehicle System', 'Customer Segmentation', 'Financial Automation'],
+          datasets: [{
+            label: 'Improvement (%)',
+            data: [15, 25, 18, 45],
+            backgroundColor: gradient,
+            borderColor: '#4B0082',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          scales: {
+            x: { beginAtZero: true, title: { display: true, text: 'Improvement (%)' }, grid: { color: '#E5E7EB' } },
+            y: { grid: { display: false } }
+          },
+          plugins: {
+            legend: { display: false },
+            title: { display: false },
+            tooltip: {
+              callbacks: {
+                label: ctx => {
+                  const labels = [
+                    '15% increase in deal closures',
+                    '25% improved reporting accuracy',
+                    '18% boost in customer engagement',
+                    '45% reduction in report generation time'
+                  ];
+                  return labels[ctx.dataIndex];
+                }
+              }
             }
           },
-          { threshold: 0.5 }
-        );
-        observer.observe(arenaRef.current);
-        return () => observer.disconnect();
-      }, [id, setActiveSection]);
-
-      return (
-        <div id={id} className="my-12">
-          <div ref={arenaRef} className="arena mx-auto">
-            <div className="tkd-icon mb-4"></div>
-            <h2 className="text-2xl font-bold text-blue-800 text-center">{title}</h2>
-            <p className="text-gray-600 text-center mt-2">{teaser}</p>
-            <button
-              className="master-btn mt-4"
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              {isOpen ? 'Close' : 'Master This'}
-            </button>
-          </div>
-          <div className={`details-panel mx-auto max-w-2xl mt-4 ${isOpen ? 'open' : ''}`}>
-            <div className="text-gray-800">{content}</div>
-          </div>
-        </div>
-      );
-    };
-
-    const App = () => {
-      const [activeSection, setActiveSection] = useState('intro');
-
-      const sections = [
-        {
-          id: 'about',
-          title: 'Champion’s Arena',
-          teaser: 'Meet the taekwondo star mastering data.',
-          content: (
-            <>
-              <p>
-                I’m Monisha Murali, an international-level taekwondo champion and data analyst with a Master’s in Information Systems (GPA: 3.85/4.0) from Northwest Missouri State University. My taekwondo-honed discipline drives my precision in data analysis, delivering impactful insights with Power BI, Python, and SQL.
-              </p>
-              <a href="/Monisha_Murali_Resume.pdf" download className="mt-4 inline-block bg-gold text-blue-800 px-6 py-2 rounded hover:bg-yellow-400 transition">Download Profile</a>
-              <p className="mt-2">
-                Email: <a href="mailto:monishagowda685@gmail.com" className="text-blue-800">monishagowda685@gmail.com</a> | 
-                LinkedIn: <a href="https://linkedin.com/in/monishamurali" className="text-blue-800">monishamurali</a>
-              </p>
-            </>
-          )
-        },
-        {
-          id: 'education',
-          title: 'Training Arena',
-          teaser: 'Where skills were sharpened with focus.',
-          content: (
-            <>
-              <h3 className="text-xl font-semibold text-blue-800">Northwest Missouri State University, MO</h3>
-              <p>Master’s in Information Systems (GPA: 3.85/4.0) | Jan 2024 - May 2025</p>
-              <p>Courses: Database Design, Business Intelligence, Project Management</p>
-              <h3 className="text-xl font-semibold text-blue-800 mt-4">Acharya Institute of Technology, India</h3>
-              <p>Bachelor’s in Engineering | Aug 2018 - Jul 2022</p>
-              <p>Best Outgoing Student</p>
-            </>
-          )
-        },
-        {
-          id: 'skills',
-          title: 'Technique Arena',
-          teaser: 'Mastered tools for data precision.',
-          content: (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <h4 className="font-semibold text-blue-800">Analysis & Visualization</h4>
-                <p>Power BI, Tableau, Excel, Google Analytics, Looker, Alteryx, Matplotlib</p>
-              </div>
-              <div>
-                <h4 className="font-semibold text-blue-800">Programming</h4>
-                <p>SQL, Python, R</p>
-              </div>
-              <div>
-                <h4 className="font-semibold text-blue-800">Database</h4>
-                <p>MySQL, Oracle, NoSQL, SQLAlchemy, Snowflake</p>
-              </div>
-              <div>
-                <h4 className="font-semibold text-blue-800">Cloud & DevOps</h4>
-                <p>AWS, GCP, Git/GitHub, Jira</p>
-              </div>
-            </div>
-          )
-        },
-        {
-          id: 'experience',
-          title: 'Sparring Arena',
-          teaser: 'Victories in real-world data challenges.',
-          content: (
-            <>
-              <h3 className="text-xl font-semibold text-blue-800">Data Analyst, Northwest Missouri State University</h3>
-              <p>May 2024 - Present</p>
-              <ul className="list-disc pl-5">
-                <li>Reduced delays by 12% with trend analysis</li>
-                <li>Improved forecasting by 20% using AI</li>
-                <li>Enhanced decisions by 35% with Power BI</li>
-              </ul>
-              <h3 className="text-xl font-semibold text-blue-800 mt-4">Business Intelligence Analyst, Accenture</h3>
-              <p>Aug 2022 - Dec 2023</p>
-              <ul className="list-disc pl-5">
-                <li>Built 50+ Tableau dashboards</li>
-                <li>Automated reports, cut time by 60%</li>
-                <li>Optimized processing by 40%</li>
-              </ul>
-            </>
-          )
-        },
-        {
-          id: 'projects',
-          title: 'Signature Arena',
-          teaser: 'Showcase moves that transformed data.',
-          content: (
-            <div className="space-y-4">
-              <div>
-                <h4 className="font-semibold text-blue-800">Sales Performance Dashboard</h4>
-                <p>Increased closures by 15%, reduced stock-outs by 30%. (Tech: Power BI, Python, SQL)</p>
-              </div>
-              <div>
-                <h4 className="font-semibold text-blue-800">Vehicle Data System</h4>
-                <p>Flask app for 120+ vehicles, improved accuracy by 25%. (Tech: Flask, Python, SQLAlchemy)</p>
-              </div>
-              <div>
-                <h4 className="font-semibold text-blue-800">Rocket Recommender</h4>
-                <p>E-commerce insights. (Tech: Python, Matplotlib, Scikit-learn)</p>
-              </div>
-            </div>
-          )
-        },
-        {
-          id: 'certifications',
-          title: 'Victory Arena',
-          teaser: 'Honors earned through data mastery.',
-          content: (
-            <ul className="list-disc pl-5">
-              <li>Microsoft Certified Power BI Data Analyst Associate</li>
-              <li>Google Data Analytics Professional Certificate</li>
-              <li>SQL Advanced Certificate</li>
-            </ul>
-          )
+          animation: {
+            duration: 1500,
+            easing: 'easeOutQuart',
+            onProgress: animation => {
+              const chart = animation.chart;
+              const ctx = chart.ctx;
+              ctx.font = '12px Poppins';
+              ctx.fillStyle = '#fff';
+              ctx.textAlign = 'center';
+              ctx.textBaseline = 'middle';
+              chart.data.datasets[0].data.forEach((value, index) => {
+                const meta = chart.getDatasetMeta(0);
+                const bar = meta.data[index];
+                const x = bar.x - 20;
+                const y = bar.y;
+                ctx.fillText(`${value}%`, x, y);
+              });
+            }
+          }
         }
-      ];
+      });
 
-      return (
-        <div className="relative min-h-screen">
-          <div className="arena-bg"></div>
-          <div className="belt-path"></div>
-          <NavBar activeSection={activeSection} setActiveSection={setActiveSection} />
-          <div id="intro" className="h-screen flex flex-col items-center justify-center text-center text-gray-800">
-            <h1 className="text-5xl font-bold text-blue-800">Monisha Murali's Taekwondo Data Arena</h1>
-            <p className="text-xl mt-4 max-w-md text-gray-600">Step into my training ground where taekwondo agility meets data excellence</p>
-            <a
-              href="#about"
-              className="mt-6 bg-blue-800 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition"
-              onClick={() => {
-                setActiveSection('about');
-                window.scrollTo({ top: document.getElementById('about').offsetTop - 80, behavior: 'smooth' });
-              }}
-            >
-              Enter Arena
-            </a>
-          </div>
-          {sections.map(section => (
-            <Arena
-              key={section.id}
-              id={section.id}
-              title={section.title}
-              teaser={section.teaser}
-              content={section.content}
-              setActiveSection={setActiveSection}
-            />
-          ))}
-          <footer className="bg-blue-800 text-white py-6 text-center">
-            <p>© 2025 Monisha Murali. All rights reserved.</p>
-          </footer>
-        </div>
-      );
-    };
+      // Scroll Progress Bar
+      window.addEventListener('scroll', () => {
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrollPercentage = (scrollTop / scrollHeight) * 100;
+        document.getElementById('scrollProgress').style.width = scrollPercentage + '%';
+      });
 
-    ReactDOM.render(<App />, document.getElementById('root'));
+      // Dark Mode Toggle
+      const toggleButton = document.getElementById('darkModeToggle');
+      toggleButton.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        toggleButton.innerHTML = document.body.classList.contains('dark-mode')
+          ? '<i class="fas fa-sun"></i>'
+          : '<i class="fas fa-moon"></i>';
+      });
+
+      // Copy Email
+      document.getElementById('copyEmail').addEventListener('click', () => {
+        navigator.clipboard.writeText('monishagowda685@gmail.com').then(() => {
+          alert('Email copied to clipboard!');
+        });
+      });
+
+      // Accordion
+      window.toggleAccordion = function(button) {
+        const content = button.nextElementSibling;
+        content.classList.toggle('hidden');
+      };
+
+      // Modal
+      window.openModal = function(id) {
+        document.getElementById(id).style.display = 'flex';
+      };
+      window.closeModal = function(id) {
+        document.getElementById(id).style.display = 'none';
+      };
+    });
   </script>
 </body>
 </html>
