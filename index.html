@@ -80,9 +80,9 @@
     canvas { max-width: 100%; }
     .profile-img {
       border-radius: 50%;
-      border: 4px solid #fff;
+      border: none;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      max-width: 150px;
+      max-width: 250px;
       height: auto;
     }
   </style>
@@ -103,8 +103,9 @@
       <h1 class="animate text-4xl md:text-5xl font-bold">Monisha Murali</h1>
       <p class="animate text-xl md:text-2xl mt-2">Data Analyst | Crafting Insights from Data</p>
       <!-- Graduation Image -->
-      <img src="https://github.com/MonishaMurali-26/data_analyst_profile/blob/main/pic.jpg" alt="Graduation" class="animate profile-img mt-4">
-      <p class="text-sm text-gray-200 mt-2">Replace the src above with the URL of your graduation image (host on GitHub or Imgur).</p>
+      <img src="https://raw.githubusercontent.com/MonishaMurali-26/data_analyst_profile/main/pic.jpg" alt="Monisha Murali Graduation" class="animate profile-img mt-4">
+      <!-- Tab Space -->
+      <div class="mt-6"></div>
     </div>
   </section>
 
@@ -430,7 +431,7 @@
         easing: 'easeOutQuad'
       });
 
-      // Chart.js Horizontal Bar (Fixed Gradient Issue)
+      // Chart.js Horizontal Bar
       const ctx = document.getElementById('impactChart').getContext('2d');
       const gradient = ctx.createLinearGradient(0, 0, 200, 0);
       gradient.addColorStop(0, '#00CED1');
