@@ -4,17 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Monisha Murali - Data Analyst Portfolio</title>
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts (Poppins) -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <!-- Font Awesome CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Anime.js CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-  <!-- Particles.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
@@ -91,28 +85,19 @@
   </style>
 </head>
 <body>
-  <!-- Scroll Progress Bar -->
   <div id="scrollProgress"></div>
-
-  <!-- Dark Mode Toggle -->
   <button id="darkModeToggle" class="fixed top-4 right-4 bg-indigo-800 text-white p-2 rounded-full hover:bg-indigo-700">
     <i class="fas fa-moon"></i>
   </button>
-
-  <!-- Hero Section -->
-  <section id="particles-js" class="relative bg-gradient-to-r from-indigo-800 to-cyan-500 text-white py-6 text-center">
+  <section id="particles-js" class="relative bg-gradient-to-r from-indigo-800 to-cyan-500 text-white py-2 text-center">
     <div class="absolute inset-0"></div>
     <div class="relative z-10">
       <h1 class="animate text-4xl md:text-5xl font-bold">Monisha Murali</h1>
       <p class="animate text-xl md:text-2xl mt-2">Data Analyst | Crafting Insights from Data</p>
-      <!-- Graduation Image -->
-      <img src="https://raw.githubusercontent.com/MonishaMurali-26/data_analyst_profile/main/pic.jpg" alt="Monisha Murali Graduation" class="animate profile-img mt-4">
-      <!-- Minimal Spacing -->
-      <div class="mt-4"></div>
+      <img src="https://raw.githubusercontent.com/MonishaMurali-26/data_analyst_profile/main/pic.jpg" alt="Monisha Murali Graduation" class="animate profile-img mt-2">
+      <div class="mt-2"></div>
     </div>
   </section>
-
-  <!-- About Section -->
   <section class="py-16 px-4 bg-white">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="animate text-3xl font-bold mb-6 text-indigo-800">About Me</h2>
@@ -135,8 +120,6 @@
       </div>
     </div>
   </section>
-
-  <!-- Skills Section -->
   <section class="py-16 px-4 bg-gray-100">
     <div class="max-w-4xl mx-auto">
       <h2 class="animate text-3xl font-bold text-center mb-6 text-indigo-800">Skills</h2>
@@ -244,8 +227,6 @@
       </div>
     </div>
   </section>
-
-  <!-- Experience Section -->
   <section class="py-16 px-4 bg-white">
     <div class="max-w-4xl mx-auto">
       <h2 class="animate text-3xl font-bold text-center mb-6 text-indigo-800">Experience</h2>
@@ -277,8 +258,6 @@
       </div>
     </div>
   </section>
-
-  <!-- Projects Section -->
   <section class="py-16 px-4 bg-gray-100">
     <div class="max-w-4xl mx-auto">
       <h2 class="animate text-3xl font-bold text-center mb-6 text-indigo-800">Projects</h2>
@@ -287,7 +266,7 @@
           <div>
             <h3 class="text-xl font-semibold">Sales Performance & Forecasting Dashboard</h3>
             <p class="text-gray-600">Tech: Power BI, Python, SQL</p>
-            <p class="text-gray-700 mt-2">Increased deal closures by 15% with a sales dashboard. Reduced stock-outs by 30% via demand prediction.</p>
+            <p class="text-gray-700 mt-2">Increased deal closures by 15% with a sales dashboard. Reduced stock-outs by 30% via demand prediction. <a href="https://github.com/MonishaMurali-26/sales-performance-forecasting" class="text-cyan-500 underline">View on GitHub</a></p>
           </div>
           <button class="bg-cyan-500 text-white px-4 py-2 rounded hover:bg-cyan-600" onclick="openModal('modal1')">View Details</button>
         </div>
@@ -295,7 +274,7 @@
           <div>
             <h3 class="text-xl font-semibold">Vehicle Data Management & Reporting System</h3>
             <p class="text-gray-600">Tech: Flask, Python, SQLAlchemy</p>
-            <p class="text-gray-700 mt-2">Managed data for 120+ vehicles, improving reporting accuracy by 25%.</p>
+            <p class="text-gray-700 mt-2">Managed data for 120+ vehicles, improving reporting accuracy by 25%. <a href="https://github.com/MonishaMurali-26/NorthWest_Vehicle_Mngnt" class="text-cyan-500 underline">View on GitHub</a></p>
           </div>
           <button class="bg-cyan-500 text-white px-4 py-2 rounded hover:bg-cyan-600" onclick="openModal('modal2')">View Details</button>
         </div>
@@ -303,7 +282,7 @@
           <div>
             <h3 class="text-xl font-semibold">Customer Segmentation Analysis</h3>
             <p class="text-gray-600">Tech: Python, Pandas, Tableau</p>
-            <p class="text-gray-700 mt-2">Boosted customer engagement by 18% with clustering and Tableau visualizations.</p>
+            <p class="text-gray-700 mt-2">Boosted customer engagement by 18% with clustering and Tableau visualizations. <a href="https://github.com/MonishaMurali-26/customer-segmentation-analysis" class="text-cyan-500 underline">View on GitHub</a></p>
           </div>
           <button class="bg-cyan-500 text-white px-4 py-2 rounded hover:bg-cyan-600" onclick="openModal('modal3')">View Details</button>
         </div>
@@ -311,17 +290,16 @@
           <div>
             <h3 class="text-xl font-semibold">Financial Reporting Automation</h3>
             <p class="text-gray-600">Tech: SQL, Python, Excel</p>
-            <p class="text-gray-700 mt-2">Automated reports, reducing generation time by 45%.</p>
+            <p class="text-gray-700 mt-2">Automated reports, reducing generation time by 45%. <a href="https://github.com/MonishaMurali-26/financial-reporting-automation" class="text-cyan-500 underline">View on GitHub</a></p>
           </div>
           <button class="bg-cyan-500 text-white px-4 py-2 rounded hover:bg-cyan-600" onclick="openModal('modal4')">View Details</button>
         </div>
       </div>
-      <div class="mt-8">
+      <div class="mt-8 chart-container">
         <h3 class="text-2xl font-semibold text-center mb-4 text-indigo-800">Key Project Impacts</h3>
         <canvas id="impactChart" class="mx-auto"></canvas>
       </div>
     </div>
-    <!-- Modals -->
     <div id="modal1" class="modal">
       <div class="modal-content">
         <h3 class="text-xl font-semibold">Sales Performance & Forecasting Dashboard</h3>
@@ -359,8 +337,6 @@
       </div>
     </div>
   </section>
-
-  <!-- Education Section -->
   <section class="py-16 px-4 bg-white">
     <div class="max-w-4xl mx-auto">
       <h2 class="animate text-3xl font-bold text-center mb-6 text-indigo-800">Education & Certifications</h2>
@@ -383,8 +359,6 @@
       </div>
     </div>
   </section>
-
-  <!-- Contact Section -->
   <section class="py-16 px-4 bg-gray-100 text-center">
     <div class="max-w-4xl mx-auto">
       <h2 class="animate text-3xl font-bold mb-6 text-indigo-800">Contact</h2>
@@ -394,18 +368,15 @@
           <i class="fas fa-envelope"></i>
           <span>Copy Email</span>
         </button>
-        <a href="https://linkedin.com/in/monishamurali" class="animate bg-indigo-800 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition flex items-center space-x-2">
+        <a href="https://www.linkedin.com/in/monishamural" class="animate bg-indigo-800 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition flex items-center space-x-2">
           <i class="fab fa-linkedin"></i>
           <span>LinkedIn</span>
         </a>
       </div>
     </div>
   </section>
-
-  <!-- JavaScript -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Particles.js
       particlesJS('particles-js', {
         particles: {
           number: { value: 80, density: { enable: true, value_area: 800 } },
@@ -423,8 +394,6 @@
         },
         retina_detect: true
       });
-
-      // Anime.js Animations
       anime({
         targets: '.animate',
         opacity: [0, 1],
@@ -433,13 +402,10 @@
         duration: 800,
         easing: 'easeOutQuad'
       });
-
-      // Chart.js Horizontal Bar
       const ctx = document.getElementById('impactChart').getContext('2d');
       const gradient = ctx.createLinearGradient(0, 0, 200, 0);
       gradient.addColorStop(0, '#00CED1');
       gradient.addColorStop(1, '#4B0082');
-
       new Chart(ctx, {
         type: 'bar',
         data: {
@@ -497,16 +463,12 @@
           }
         }
       });
-
-      // Scroll Progress Bar
       window.addEventListener('scroll', () => {
         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
         const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         const scrollPercentage = (scrollTop / scrollHeight) * 100;
         document.getElementById('scrollProgress').style.width = scrollPercentage + '%';
       });
-
-      // Dark Mode Toggle
       const toggleButton = document.getElementById('darkModeToggle');
       toggleButton.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
@@ -514,21 +476,15 @@
           ? '<i class="fas fa-sun"></i>'
           : '<i class="fas fa-moon"></i>';
       });
-
-      // Copy Email
       document.getElementById('copyEmail').addEventListener('click', () => {
         navigator.clipboard.writeText('monishagowda685@gmail.com').then(() => {
           alert('Email copied to clipboard!');
         });
       });
-
-      // Accordion
       window.toggleAccordion = function(button) {
         const content = button.nextElementSibling;
         content.classList.toggle('hidden');
       };
-
-      // Modal
       window.openModal = function(id) {
         document.getElementById(id).style.display = 'flex';
       };
