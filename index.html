@@ -55,6 +55,25 @@
     
     .gradient-bg {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #00CED1 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .gradient-bg::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: moveBackground 20s linear infinite;
+    }
+    
+    @keyframes moveBackground {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
     }
     
     .gradient-text {
@@ -65,8 +84,8 @@
     }
     
     .profile-img {
-      width: 220px;
-      height: 220px;
+      width: 180px;
+      height: 180px;
       object-fit: cover;
       border-radius: 50%;
       border: 6px solid rgba(255, 255, 255, 0.3);
@@ -91,7 +110,7 @@
     
     .card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 20px 25px -5px rgba(0, 206, 209, 0.2), 0 10px 10px -5px rgba(75, 0, 130, 0.1);
     }
     
     .skill-badge {
@@ -139,6 +158,48 @@
       transform: scale(1.1) rotate(5deg);
     }
     
+    .skill-badge-compact {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      border: 1.5px solid #e2e8f0;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      color: #334155;
+    }
+    
+    .skill-badge-compact:hover {
+      transform: translateY(-2px);
+      border-color: #00CED1;
+      box-shadow: 0 4px 12px rgba(0, 206, 209, 0.2);
+      background: white;
+    }
+    
+    .skill-badge-compact i {
+      font-size: 18px;
+      transition: transform 0.3s ease;
+    }
+    
+    .skill-badge-compact:hover i {
+      transform: scale(1.15);
+    }
+    
+    .dark-mode .skill-badge-compact {
+      background: linear-gradient(135deg, #334155 0%, #475569 100%);
+      border-color: #475569;
+      color: #f1f5f9;
+    }
+    
+    .dark-mode .skill-badge-compact:hover {
+      background: #1e293b;
+      border-color: #00CED1;
+    }
+    
     .stat-card {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       border-radius: 16px;
@@ -159,6 +220,12 @@
       line-height: 1;
       margin-bottom: 8px;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
     }
     
     .timeline-item {
@@ -212,6 +279,25 @@
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       padding: 24px;
       color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .project-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+      transform: rotate(45deg);
+      animation: shimmer 3s infinite;
+    }
+    
+    @keyframes shimmer {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
     }
     
     .tech-tag {
@@ -303,7 +389,7 @@
     
     .section-header {
       text-align: center;
-      margin-bottom: 48px;
+      margin-bottom: 40px;
     }
     
     .section-title {
@@ -326,6 +412,10 @@
     @keyframes floating {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes fillBar {
+      from { width: 0; }
     }
     
     .icon-circle {
@@ -413,16 +503,16 @@
   </button>
   
   <!-- Hero Section -->
-  <section id="particles-js" class="relative gradient-bg text-white py-24 overflow-hidden">
+  <section id="particles-js" class="relative gradient-bg text-white py-16 overflow-hidden">
     <div class="absolute inset-0"></div>
     <div class="relative z-10 max-w-6xl mx-auto px-4">
       <div class="text-center">
-        <div class="inline-block mb-6 floating">
-          <img src="https://raw.githubusercontent.com/MonishaMurali-26/data_analyst_profile/main/pic.jpg" alt="Monisha Murali" class="profile-img">
+        <div class="inline-block mb-4 floating">
+          <img src="https://raw.githubusercontent.com/MonishaMurali-26/data_analyst_profile/main/pic.jpeg" alt="Monisha Murali" class="profile-img">
         </div>
-        <h1 class="text-5xl md:text-7xl font-bold heading-font mb-4 animate">Monisha Murali</h1>
-        <p class="text-xl md:text-3xl mb-6 animate font-light">Data Analyst | Transforming Data into Strategic Insights</p>
-        <div class="flex flex-wrap justify-center gap-4 mt-8 animate">
+        <h1 class="text-5xl md:text-7xl font-bold heading-font mb-3 animate">Monisha Murali</h1>
+        <p class="text-xl md:text-3xl mb-5 animate font-light">Data Engineer & Analytics Professional | Transforming Data into Strategic Insights</p>
+        <div class="flex flex-wrap justify-center gap-4 mt-6 animate">
           <a href="#contact" class="btn-primary">Get In Touch</a>
           <a href="#projects" class="btn-secondary">View Projects</a>
         </div>
@@ -431,173 +521,401 @@
   </section>
   
   <!-- About Section -->
-  <section class="py-20 px-4 bg-white dark-mode-section">
+  <section class="py-16 px-4 bg-white dark-mode-section">
     <div class="max-w-6xl mx-auto">
       <div class="section-header animate">
         <h2 class="section-title heading-font gradient-text">About Me</h2>
-        <p class="section-subtitle text-gray-600">Passionate about turning complex data into actionable business intelligence</p>
+        <p class="section-subtitle text-gray-600">Building scalable data systems that power business decisions</p>
       </div>
       
       <div class="card animate max-w-4xl mx-auto mb-12">
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          I'm an aspiring <strong class="gradient-text">Data Engineer and Analytics professional</strong> with 4+ years of experience in building scalable data pipelines, enterprise integrations, and BI solutions across higher education and financial systems. I work at the intersection of data engineering, analytics, and HR systems—turning complex, fragmented data into reliable, decision-ready insights.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          My background includes working with platforms like <strong>Workday HCM, Banner ERP, Snowflake, Databricks</strong>, and cloud ecosystems across <strong>AWS, Azure, and GCP</strong>, supported by Power BI and SQL-driven analytics.
+        </p>
+        <p class="text-lg text-gray-700 leading-relaxed mb-4">
+          My interest in data engineering deepened while working on enterprise integrations and migrations—especially during projects involving Banner-to-Workday data flows, HR integrations, and analytics pipelines supporting operational and compliance needs. Seeing how clean pipelines, well-modeled data, and reliable integrations can eliminate manual work, reduce errors, and enable better decisions is what motivates me.
+        </p>
         <p class="text-lg text-gray-700 leading-relaxed">
-          Results-driven Data Analyst with 2+ years of experience specializing in financial reporting, data integration, and interactive dashboard development. Expert in leveraging SQL, Python, Power BI, and Tableau to transform complex datasets into actionable insights through advanced visualization, statistical modeling, and process automation. Proven track record of delivering measurable business impact through data-driven decision-making.
+          Whether it's optimizing ETL workflows, designing cloud-based data architectures, or enabling stakeholders through dashboards and analytics, I enjoy building systems that quietly but powerfully make organizations run better. I'm currently exploring <strong>full-time roles and internship opportunities</strong> focused on Data Engineering, Analytics, and Workday Integrations, where I can continue working on large-scale data platforms, cloud-based pipelines, and enterprise HR systems.
         </p>
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="stat-card animate">
-          <div class="stat-number">2+</div>
+          <div class="stat-number">4+</div>
           <p class="text-lg font-semibold">Years Experience</p>
-          <p class="text-sm opacity-90 mt-2">In Data Analytics</p>
+          <p class="text-sm opacity-90 mt-2">Data Engineering & Migrations</p>
         </div>
         <div class="stat-card animate" style="background: linear-gradient(135deg, #00CED1 0%, #4B0082 100%);">
-          <div class="stat-number">50+</div>
-          <p class="text-lg font-semibold">Dashboards Created</p>
-          <p class="text-sm opacity-90 mt-2">Across Multiple Platforms</p>
+          <div class="stat-number">4TB</div>
+          <p class="text-lg font-semibold">Data Migrated</p>
+          <p class="text-sm opacity-90 mt-2">To Cloud Platforms</p>
         </div>
         <div class="stat-card animate" style="background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);">
-          <div class="stat-number">40%</div>
-          <p class="text-lg font-semibold">Efficiency Boost</p>
-          <p class="text-sm opacity-90 mt-2">Average Improvement</p>
+          <div class="stat-number">15K+</div>
+          <p class="text-lg font-semibold">Records Migrated</p>
+          <p class="text-sm opacity-90 mt-2">Workday EIB Templates</p>
         </div>
       </div>
     </div>
   </section>
   
   <!-- Skills Section -->
-  <section class="py-20 px-4 bg-gray-50 dark-mode-section">
+  <section class="py-16 px-4 bg-gray-50 dark-mode-section">
     <div class="max-w-6xl mx-auto">
       <div class="section-header animate">
         <h2 class="section-title heading-font gradient-text">Technical Expertise</h2>
-        <p class="section-subtitle text-gray-600">Comprehensive toolkit for modern data analytics</p>
+        <p class="section-subtitle text-gray-600">Comprehensive toolkit for enterprise data engineering and analytics</p>
       </div>
       
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="skill-badge animate">
-          <i class="fas fa-database"></i>
-          <div>
-            <div class="font-semibold text-gray-800">SQL</div>
-            <div class="text-xs text-gray-600">Query Optimization</div>
+      <!-- Categorized Skills -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+        <!-- Programming & Scripting -->
+        <div class="card animate">
+          <h3 class="text-xl font-bold mb-4 flex items-center gradient-text">
+            <i class="fas fa-code mr-3 text-2xl"></i>
+            Programming & Scripting
+          </h3>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="skill-badge-compact">
+              <i class="fab fa-python text-blue-500"></i>
+              <span>Python</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-database text-orange-500"></i>
+              <span>SQL</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-database text-red-500"></i>
+              <span>PL/SQL</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-fire text-orange-600"></i>
+              <span>PySpark</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-terminal text-gray-700"></i>
+              <span>Shell Scripting</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fab fa-r-project text-blue-600"></i>
+              <span>R</span>
+            </div>
           </div>
         </div>
         
-        <div class="skill-badge animate">
-          <i class="fab fa-python"></i>
-          <div>
-            <div class="font-semibold text-gray-800">Python</div>
-            <div class="text-xs text-gray-600">Data Analysis</div>
+        <!-- Data Engineering & ETL -->
+        <div class="card animate">
+          <h3 class="text-xl font-bold mb-4 flex items-center gradient-text">
+            <i class="fas fa-exchange-alt mr-3 text-2xl"></i>
+            Data Engineering & ETL/ELT
+          </h3>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="skill-badge-compact">
+              <i class="fas fa-project-diagram text-purple-500"></i>
+              <span>Apache Airflow</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-cloud text-cyan-500"></i>
+              <span>dbt Cloud</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-cogs text-blue-500"></i>
+              <span>Informatica</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-sync text-green-500"></i>
+              <span>Fivetran</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-stream text-indigo-500"></i>
+              <span>Custom Pipelines</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-check-double text-emerald-500"></i>
+              <span>Data Validation</span>
+            </div>
           </div>
         </div>
         
-        <div class="skill-badge animate">
-          <i class="fas fa-chart-bar"></i>
-          <div>
-            <div class="font-semibold text-gray-800">Power BI</div>
-            <div class="text-xs text-gray-600">Dashboard Design</div>
+        <!-- Databases & Cloud Platforms -->
+        <div class="card animate">
+          <h3 class="text-xl font-bold mb-4 flex items-center gradient-text">
+            <i class="fas fa-server mr-3 text-2xl"></i>
+            Databases & Cloud Platforms
+          </h3>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="skill-badge-compact">
+              <i class="fas fa-database text-red-600"></i>
+              <span>Oracle</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-snowflake text-cyan-400"></i>
+              <span>Snowflake</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-elephant text-blue-700"></i>
+              <span>PostgreSQL</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-database text-blue-500"></i>
+              <span>MySQL</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fab fa-google text-yellow-500"></i>
+              <span>BigQuery</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fab fa-aws text-orange-500"></i>
+              <span>AWS</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fab fa-microsoft text-blue-600"></i>
+              <span>Azure</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fab fa-google text-red-500"></i>
+              <span>GCP</span>
+            </div>
           </div>
         </div>
         
-        <div class="skill-badge animate">
-          <i class="fas fa-chart-pie"></i>
-          <div>
-            <div class="font-semibold text-gray-800">Tableau</div>
-            <div class="text-xs text-gray-600">Data Visualization</div>
+        <!-- Data Warehousing & Modeling -->
+        <div class="card animate">
+          <h3 class="text-xl font-bold mb-4 flex items-center gradient-text">
+            <i class="fas fa-warehouse mr-3 text-2xl"></i>
+            Data Warehousing & Modeling
+          </h3>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="skill-badge-compact">
+              <i class="fas fa-cube text-purple-500"></i>
+              <span>Kimball Method</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-box text-indigo-500"></i>
+              <span>Data Vault 2.0</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-star text-yellow-500"></i>
+              <span>Star Schema</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-snowflake text-blue-400"></i>
+              <span>Snowflake Schema</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-database text-cyan-600"></i>
+              <span>Data Lakes</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-truck text-green-600"></i>
+              <span>Data Migration</span>
+            </div>
           </div>
         </div>
         
-        <div class="skill-badge animate">
-          <i class="fab fa-r-project"></i>
-          <div>
-            <div class="font-semibold text-gray-800">R</div>
-            <div class="text-xs text-gray-600">Statistical Analysis</div>
+        <!-- Integration & APIs -->
+        <div class="card animate">
+          <h3 class="text-xl font-bold mb-4 flex items-center gradient-text">
+            <i class="fas fa-plug mr-3 text-2xl"></i>
+            Integration & APIs
+          </h3>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="skill-badge-compact">
+              <i class="fas fa-network-wired text-blue-500"></i>
+              <span>REST APIs</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-exchange-alt text-purple-500"></i>
+              <span>SOAP APIs</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-code text-green-500"></i>
+              <span>JSON/XML</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-file-export text-orange-500"></i>
+              <span>SFTP</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-users text-cyan-500"></i>
+              <span>Workday Studio</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-upload text-indigo-500"></i>
+              <span>EIB Templates</span>
+            </div>
           </div>
         </div>
         
-        <div class="skill-badge animate">
-          <i class="fas fa-table"></i>
-          <div>
-            <div class="font-semibold text-gray-800">Pandas</div>
-            <div class="text-xs text-gray-600">Data Manipulation</div>
+        <!-- Enterprise & Academic Systems -->
+        <div class="card animate">
+          <h3 class="text-xl font-bold mb-4 flex items-center gradient-text">
+            <i class="fas fa-building mr-3 text-2xl"></i>
+            Enterprise & Academic Systems
+          </h3>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="skill-badge-compact">
+              <i class="fas fa-university text-red-600"></i>
+              <span>Banner ERP</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-briefcase text-blue-600"></i>
+              <span>Workday HCM</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-graduation-cap text-purple-500"></i>
+              <span>Workday Student</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-money-check text-green-600"></i>
+              <span>Workday Payroll</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-home text-orange-500"></i>
+              <span>eRezLife</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-users-cog text-cyan-600"></i>
+              <span>Salesforce</span>
+            </div>
           </div>
         </div>
         
-        <div class="skill-badge animate">
-          <i class="fas fa-calculator"></i>
-          <div>
-            <div class="font-semibold text-gray-800">NumPy</div>
-            <div class="text-xs text-gray-600">Numerical Computing</div>
+        <!-- DevOps & Version Control -->
+        <div class="card animate">
+          <h3 class="text-xl font-bold mb-4 flex items-center gradient-text">
+            <i class="fas fa-infinity mr-3 text-2xl"></i>
+            DevOps & CI/CD
+          </h3>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="skill-badge-compact">
+              <i class="fab fa-git-alt text-orange-600"></i>
+              <span>Git/GitHub</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-rocket text-blue-500"></i>
+              <span>CI/CD Pipelines</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-vial text-green-500"></i>
+              <span>Automated Testing</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-layer-group text-purple-500"></i>
+              <span>Environment Mgmt</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-code-branch text-indigo-500"></i>
+              <span>Version Control</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fab fa-docker text-blue-400"></i>
+              <span>Containerization</span>
+            </div>
           </div>
         </div>
         
-        <div class="skill-badge animate">
-          <i class="fas fa-book"></i>
-          <div>
-            <div class="font-semibold text-gray-800">Jupyter</div>
-            <div class="text-xs text-gray-600">Interactive Analysis</div>
+        <!-- Analytics & Visualization Tools -->
+        <div class="card animate">
+          <h3 class="text-xl font-bold mb-4 flex items-center gradient-text">
+            <i class="fas fa-chart-line mr-3 text-2xl"></i>
+            Analytics & Visualization
+          </h3>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="skill-badge-compact">
+              <i class="fas fa-chart-bar text-yellow-600"></i>
+              <span>Power BI</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-chart-area text-blue-500"></i>
+              <span>Tableau</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-chart-pie text-purple-500"></i>
+              <span>Looker</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-table text-green-600"></i>
+              <span>Excel Advanced</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-book text-blue-600"></i>
+              <span>Jupyter Notebook</span>
+            </div>
+            <div class="skill-badge-compact">
+              <i class="fas fa-code text-indigo-500"></i>
+              <span>VS Code</span>
+            </div>
           </div>
         </div>
-        
-        <div class="skill-badge animate">
-          <i class="fas fa-database"></i>
+      </div>
+      
+      <!-- Core Competencies with Progress Bars -->
+      <div class="card animate">
+        <h3 class="text-2xl font-bold text-center mb-8 gradient-text">Core Competencies</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <div class="font-semibold text-gray-800">MySQL</div>
-            <div class="text-xs text-gray-600">Database Management</div>
+            <div class="flex justify-between mb-2">
+              <span class="font-semibold text-gray-800">SQL & Database Design</span>
+              <span class="text-cyan-500 font-bold">95%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+              <div class="progress-bar h-full bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full" style="width: 95%; animation: fillBar 2s ease-out;"></div>
+            </div>
           </div>
-        </div>
-        
-        <div class="skill-badge animate">
-          <i class="fas fa-server"></i>
+          
           <div>
-            <div class="font-semibold text-gray-800">Oracle</div>
-            <div class="text-xs text-gray-600">Enterprise Systems</div>
+            <div class="flex justify-between mb-2">
+              <span class="font-semibold text-gray-800">Python & Data Engineering</span>
+              <span class="text-purple-500 font-bold">92%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+              <div class="progress-bar h-full bg-gradient-to-r from-purple-500 to-pink-600 rounded-full" style="width: 92%; animation: fillBar 2s ease-out 0.2s backwards;"></div>
+            </div>
           </div>
-        </div>
-        
-        <div class="skill-badge animate">
-          <i class="fas fa-snowflake"></i>
+          
           <div>
-            <div class="font-semibold text-gray-800">Snowflake</div>
-            <div class="text-xs text-gray-600">Cloud Warehousing</div>
+            <div class="flex justify-between mb-2">
+              <span class="font-semibold text-gray-800">ETL/ELT Pipelines & Data Integration</span>
+              <span class="text-indigo-500 font-bold">94%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+              <div class="progress-bar h-full bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full" style="width: 94%; animation: fillBar 2s ease-out 0.4s backwards;"></div>
+            </div>
           </div>
-        </div>
-        
-        <div class="skill-badge animate">
-          <i class="fas fa-fire"></i>
+          
           <div>
-            <div class="font-semibold text-gray-800">Apache Spark</div>
-            <div class="text-xs text-gray-600">Big Data Processing</div>
+            <div class="flex justify-between mb-2">
+              <span class="font-semibold text-gray-800">Cloud Platforms (AWS/Azure/GCP)</span>
+              <span class="text-blue-500 font-bold">88%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+              <div class="progress-bar h-full bg-gradient-to-r from-blue-500 to-cyan-600 rounded-full" style="width: 88%; animation: fillBar 2s ease-out 0.6s backwards;"></div>
+            </div>
           </div>
-        </div>
-        
-        <div class="skill-badge animate">
-          <i class="fab fa-aws"></i>
+          
           <div>
-            <div class="font-semibold text-gray-800">AWS</div>
-            <div class="text-xs text-gray-600">Cloud Analytics</div>
+            <div class="flex justify-between mb-2">
+              <span class="font-semibold text-gray-800">Data Warehousing & Modeling</span>
+              <span class="text-green-500 font-bold">90%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+              <div class="progress-bar h-full bg-gradient-to-r from-green-500 to-emerald-600 rounded-full" style="width: 90%; animation: fillBar 2s ease-out 0.8s backwards;"></div>
+            </div>
           </div>
-        </div>
-        
-        <div class="skill-badge animate">
-          <i class="fab fa-google"></i>
+          
           <div>
-            <div class="font-semibold text-gray-800">GCP</div>
-            <div class="text-xs text-gray-600">Cloud Pipelines</div>
-          </div>
-        </div>
-        
-        <div class="skill-badge animate">
-          <i class="fas fa-exchange-alt"></i>
-          <div>
-            <div class="font-semibold text-gray-800">ETL</div>
-            <div class="text-xs text-gray-600">Data Integration</div>
-          </div>
-        </div>
-        
-        <div class="skill-badge animate">
-          <i class="fas fa-brain"></i>
-          <div>
-            <div class="font-semibold text-gray-800">Machine Learning</div>
-            <div class="text-xs text-gray-600">Predictive Models</div>
+            <div class="flex justify-between mb-2">
+              <span class="font-semibold text-gray-800">Enterprise Systems (Workday/Banner)</span>
+              <span class="text-orange-500 font-bold">89%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+              <div class="progress-bar h-full bg-gradient-to-r from-orange-500 to-red-600 rounded-full" style="width: 89%; animation: fillBar 2s ease-out 1s backwards;"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -605,7 +923,7 @@
   </section>
   
   <!-- Experience Section -->
-  <section class="py-20 px-4 bg-white dark-mode-section">
+  <section class="py-16 px-4 bg-white dark-mode-section">
     <div class="max-w-6xl mx-auto">
       <div class="section-header animate">
         <h2 class="section-title heading-font gradient-text">Professional Experience</h2>
@@ -617,7 +935,7 @@
           <div class="card">
             <button class="accordion-button" onclick="toggleAccordion(this)">
               <div>
-                <h3 class="text-2xl font-bold mb-1">Data Analyst</h3>
+                <h3 class="text-2xl font-bold mb-1">Data Engineer with Workday Expertise</h3>
                 <p class="text-gray-600">Northwest Missouri State University, MO</p>
               </div>
               <span class="text-gray-400">May 2024 - Present</span>
@@ -625,20 +943,48 @@
             <div class="accordion-content">
               <ul class="space-y-3 text-gray-700">
                 <li class="flex items-start">
-                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                  <span>Developed comprehensive trend analysis reports, reducing processing delays by 12% through optimized data workflows</span>
+                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                  <span>Partner with 8+ campus departments (Housing, Financial Aid, Registrar, HR, Admissions) to design Python- and SQL-based data pipelines and automation solutions, reducing manual processes and saving 20+ staff hours per week</span>
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                  <span>Built predictive models using Python and statistical techniques, improving forecasting accuracy by 20%</span>
+                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                  <span>Designed and maintained ETL/ELT pipelines integrating Banner ERP, eRezLife, REST APIs, and cloud storage to support institutional analytics, dashboards, and operational reporting</span>
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                  <span>Delivered interactive Power BI dashboards with real-time KPI tracking, boosting decision-making efficiency by 35%</span>
+                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                  <span>Built a real-time housing and billing integration syncing room assignments and charges between systems, processing 3,000+ student records and $2M+ annually with 99.8% accuracy</span>
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                  <span>Streamlined ETL pipelines, increasing data integration speed by 40% across multiple systems</span>
+                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                  <span>Developed automated background-check workflows using Python and APIs, enabling same-day processing and improving compliance turnaround times</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                  <span>Implemented data validation, reconciliation, and audit frameworks identifying 300+ data quality issues during system integrations and migrations</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                  <span>Prepared clean, validated, and feature-ready datasets to support statistical analysis and machine-learning workflows, enabling downstream model experimentation, scoring, and analytics use cases</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                  <span>Led the data engineering workstream for Banner-to-Workday migration, extracting, transforming, and loading 15,000+ employee and student records via EIB templates</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                  <span>Migrated 4TB of historical institutional data from on-prem databases to Snowflake, improving query performance by 90% while maintaining 100% data integrity</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                  <span>Implemented Git-based CI/CD workflows for data pipelines, enabling version-controlled deployments, safer releases, and faster recovery across development and production environments</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                  <span>Provided production support for scheduled pipelines and integrations, building monitoring and alerting systems that prevented 12+ potential production incidents</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                  <span>Created and maintained technical documentation, source-to-target mappings, and workflow metadata aligned with institutional data governance practices</span>
                 </li>
               </ul>
             </div>
@@ -649,7 +995,7 @@
           <div class="card">
             <button class="accordion-button" onclick="toggleAccordion(this)">
               <div>
-                <h3 class="text-2xl font-bold mb-1">Business Intelligence Analyst</h3>
+                <h3 class="text-2xl font-bold mb-1">Data Engineer - Migration Specialist</h3>
                 <p class="text-gray-600">Accenture, Bangalore, India</p>
               </div>
               <span class="text-gray-400">Aug 2022 - Dec 2023</span>
@@ -657,20 +1003,32 @@
             <div class="accordion-content">
               <ul class="space-y-3 text-gray-700">
                 <li class="flex items-start">
-                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                  <span>Created 50+ interactive dashboards for KPI monitoring, reducing report delivery time by 60%</span>
+                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                  <span>Collaborated with business analysts and stakeholders to deliver enterprise data warehouse solutions supporting HR, payroll, and operational analytics</span>
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                  <span>Reduced data processing time by 40% through optimized Informatica ETL pipelines</span>
+                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                  <span>Designed 50+ fact and dimension tables using Kimball methodology and SCD Type 2, reducing reporting runtimes from 5 minutes to 15 seconds</span>
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                  <span>Enhanced data workflows, increasing processing speed by 50% through automation</span>
+                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                  <span>Developed Informatica PowerCenter ETL workflows migrating terabytes of data from legacy DB2 systems to Snowflake cloud warehouses</span>
                 </li>
                 <li class="flex items-start">
-                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                  <span>Built Python-based predictive models for trend forecasting and business planning</span>
+                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                  <span>Built Python-based data validation and reconciliation frameworks, generating audit reports that ensured trust and transparency during migrations</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                  <span>Optimized Snowflake performance through clustering, materialized views, and query tuning, improving performance by 50% and reducing compute costs by 30%</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                  <span>Maintained production environments by troubleshooting ETL failures, resolving data discrepancies, and keeping SLA compliance above 98%</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                  <span>Authored technical documentation, architecture diagrams, and data lineage artifacts for long-term maintainability and knowledge transfer</span>
                 </li>
               </ul>
             </div>
@@ -681,7 +1039,7 @@
   </section>
   
   <!-- Projects Section -->
-  <section class="py-20 px-4 bg-gray-50 dark-mode-section">
+  <section class="py-16 px-4 bg-gray-50 dark-mode-section">
     <div class="max-w-6xl mx-auto">
       <div class="section-header animate">
         <h2 class="section-title heading-font gradient-text">Featured Projects</h2>
@@ -689,6 +1047,60 @@
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div class="project-card animate">
+          <div class="project-header">
+            <h3 class="text-2xl font-bold mb-2">International Student SEVIS Data Integration</h3>
+            <div class="flex flex-wrap gap-2 mb-3">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">REST API</span>
+              <span class="tech-tag">Oracle</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="space-y-3 mb-4">
+              <div class="flex items-center text-green-600">
+                <i class="fas fa-arrow-up mr-2"></i>
+                <span class="font-semibold">99% reliability improvement</span>
+              </div>
+              <div class="flex items-center text-blue-600">
+                <i class="fas fa-users mr-2"></i>
+                <span class="font-semibold">500+ students managed</span>
+              </div>
+            </div>
+            <p class="text-gray-700 mb-4">Automated data pipelines syncing international student data from Banner to Terra Dotta for compliance reporting with structured validation and retry logic.</p>
+            <div class="flex gap-3">
+              <button class="btn-primary text-sm py-2 px-4" onclick="openModal('modal5')">View Details</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project-card animate">
+          <div class="project-header">
+            <h3 class="text-2xl font-bold mb-2">Real-Time Housing Integration System</h3>
+            <div class="flex flex-wrap gap-2 mb-3">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">REST APIs</span>
+              <span class="tech-tag">Oracle</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="space-y-3 mb-4">
+              <div class="flex items-center text-green-600">
+                <i class="fas fa-arrow-up mr-2"></i>
+                <span class="font-semibold">99.2% reliability achieved</span>
+              </div>
+              <div class="flex items-center text-purple-600">
+                <i class="fas fa-home mr-2"></i>
+                <span class="font-semibold">3,000+ residents served</span>
+              </div>
+            </div>
+            <p class="text-gray-700 mb-4">Bidirectional integration synchronizing housing assignments and billing data with advanced monitoring, alerting, and error handling.</p>
+            <div class="flex gap-3">
+              <button class="btn-primary text-sm py-2 px-4" onclick="openModal('modal6')">View Details</button>
+            </div>
+          </div>
+        </div>
+        
         <div class="project-card animate">
           <div class="project-header">
             <h3 class="text-2xl font-bold mb-2">Sales Performance & Forecasting</h3>
@@ -821,7 +1233,7 @@
   </section>
   
   <!-- Education Section -->
-  <section class="py-20 px-4 bg-white dark-mode-section">
+  <section class="py-16 px-4 bg-white dark-mode-section">
     <div class="max-w-6xl mx-auto">
       <div class="section-header animate">
         <h2 class="section-title heading-font gradient-text">Education & Certifications</h2>
@@ -876,7 +1288,7 @@
   </section>
   
   <!-- Contact Section -->
-  <section id="contact" class="py-20 px-4 gradient-bg text-white">
+  <section id="contact" class="py-16 px-4 gradient-bg text-white">
     <div class="max-w-4xl mx-auto text-center">
       <div class="animate">
         <h2 class="text-5xl font-bold heading-font mb-6">Let's Connect</h2>
@@ -885,7 +1297,7 @@
         <div class="flex flex-col sm:flex-row justify-center gap-6">
           <button id="copyEmail" class="bg-white text-indigo-800 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl flex items-center justify-center space-x-3">
             <i class="fas fa-envelope text-xl"></i>
-            <span>monishagowda685@gmail.com</span>
+            <span>monisha.murali026@gmail.com</span>
           </button>
           
           <a href="https://www.linkedin.com/in/monishamural" target="_blank" class="bg-blue-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl flex items-center justify-center space-x-3">
@@ -904,6 +1316,118 @@
   </footer>
   
   <!-- Modals -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <div class="flex justify-between items-start mb-6">
+        <h3 class="text-3xl font-bold gradient-text">International Student SEVIS Data Integration</h3>
+        <button onclick="closeModal('modal5')" class="text-3xl text-gray-400 hover:text-gray-600">&times;</button>
+      </div>
+      
+      <div class="space-y-4">
+        <div>
+          <h4 class="font-bold text-lg mb-2 flex items-center">
+            <i class="fas fa-tools text-cyan-500 mr-2"></i>
+            Technologies Used
+          </h4>
+          <div class="flex flex-wrap gap-2">
+            <span class="tech-tag bg-purple-500 text-white">Python</span>
+            <span class="tech-tag bg-blue-500 text-white">REST API</span>
+            <span class="tech-tag bg-red-500 text-white">Oracle</span>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="font-bold text-lg mb-2 flex items-center">
+            <i class="fas fa-chart-line text-green-500 mr-2"></i>
+            Key Achievements
+          </h4>
+          <ul class="space-y-2">
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+              <span>Improved data reliability from 85% to 99% through structured validation</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+              <span>Automated compliance reporting for 500+ international students</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+              <span>Implemented retry logic and comprehensive logging for error tracking</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="font-bold text-lg mb-2 flex items-center">
+            <i class="fas fa-info-circle text-blue-500 mr-2"></i>
+            Project Details
+          </h4>
+          <p class="text-gray-700">Built automated data pipelines to synchronize international student data from Banner ERP to Terra Dotta for SEVIS compliance reporting. Implemented robust error handling with structured validation, retry mechanisms, and detailed logging to ensure data accuracy and reliability for regulatory compliance across 500+ international students.</p>
+        </div>
+      </div>
+      
+      <div class="mt-8 flex justify-end gap-3">
+        <button class="btn-primary" onclick="closeModal('modal5')">Close</button>
+      </div>
+    </div>
+  </div>
+  
+  <div id="modal6" class="modal">
+    <div class="modal-content">
+      <div class="flex justify-between items-start mb-6">
+        <h3 class="text-3xl font-bold gradient-text">Real-Time Housing Integration System</h3>
+        <button onclick="closeModal('modal6')" class="text-3xl text-gray-400 hover:text-gray-600">&times;</button>
+      </div>
+      
+      <div class="space-y-4">
+        <div>
+          <h4 class="font-bold text-lg mb-2 flex items-center">
+            <i class="fas fa-tools text-cyan-500 mr-2"></i>
+            Technologies Used
+          </h4>
+          <div class="flex flex-wrap gap-2">
+            <span class="tech-tag bg-purple-500 text-white">Python</span>
+            <span class="tech-tag bg-blue-500 text-white">REST APIs</span>
+            <span class="tech-tag bg-red-500 text-white">Oracle</span>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="font-bold text-lg mb-2 flex items-center">
+            <i class="fas fa-chart-line text-green-500 mr-2"></i>
+            Key Achievements
+          </h4>
+          <ul class="space-y-2">
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+              <span>Achieved 99.2% integration reliability through advanced monitoring</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+              <span>Synchronized housing and billing data for 3,000+ residents in real-time</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+              <span>Implemented proactive alerting system for immediate issue resolution</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="font-bold text-lg mb-2 flex items-center">
+            <i class="fas fa-info-circle text-blue-500 mr-2"></i>
+            Project Details
+          </h4>
+          <p class="text-gray-700">Developed bidirectional integration systems to synchronize housing assignments and billing data between eRezLife housing management and Banner ERP. Implemented comprehensive monitoring, alerting, and error handling mechanisms to ensure 99.2% reliability, serving over 3,000 residents with real-time data synchronization and automated billing processes.</p>
+        </div>
+      </div>
+      
+      <div class="mt-8 flex justify-end gap-3">
+        <button class="btn-primary" onclick="closeModal('modal6')">Close</button>
+      </div>
+    </div>
+  </div>
+  
   <div id="modal1" class="modal">
     <div class="modal-content">
       <div class="flex justify-between items-start mb-6">
@@ -1178,7 +1702,7 @@
     
     // Copy email
     document.getElementById('copyEmail').addEventListener('click', function() {
-      navigator.clipboard.writeText('monishagowda685@gmail.com').then(() => {
+      navigator.clipboard.writeText('monisha.murali026@gmail.com').then(() => {
         const btn = this;
         const originalHTML = btn.innerHTML;
         btn.innerHTML = '<i class="fas fa-check mr-2"></i>Email Copied!';
