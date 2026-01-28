@@ -5,38 +5,225 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Monisha Murali - Data Analyst Portfolio</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
+    * {
       margin: 0;
       padding: 0;
-      background-color: #E5E7EB;
-      transition: background-color 0.3s, color 0.3s;
+      box-sizing: border-box;
     }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #F9FAFB;
+      color: #1F2937;
+      line-height: 1.6;
+      transition: all 0.3s ease;
+    }
+    
     .dark-mode {
-      background-color: #1F2937;
-      color: #F3F4F6;
+      background-color: #0F172A;
+      color: #F1F5F9;
     }
-    .dark-mode .bg-white { background-color: #374151; }
-    .dark-mode .bg-gray-100 { background-color: #1F2937; }
-    .dark-mode .bg-gray-50 { background-color: #4B5563; }
-    .dark-mode .text-gray-700 { color: #D1D5DB; }
-    .dark-mode .text-gray-600 { color: #9CA3AF; }
-    .animate { opacity: 0; }
+    
+    .dark-mode .bg-white { background-color: #1E293B; }
+    .dark-mode .bg-gray-50 { background-color: #334155; }
+    .dark-mode .bg-gray-100 { background-color: #1E293B; }
+    .dark-mode .text-gray-700 { color: #E2E8F0; }
+    .dark-mode .text-gray-600 { color: #CBD5E1; }
+    .dark-mode .text-gray-800 { color: #F1F5F9; }
+    .dark-mode .shadow-card { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2); }
+    
+    .heading-font {
+      font-family: 'Playfair Display', serif;
+    }
+    
     #scrollProgress {
       position: fixed;
       top: 0;
       left: 0;
-      height: 4px;
-      background: #00CED1;
+      height: 3px;
+      background: linear-gradient(90deg, #00CED1, #4B0082);
       width: 0;
-      z-index: 50;
+      z-index: 9999;
+      transition: width 0.1s ease;
     }
+    
+    .gradient-bg {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #00CED1 100%);
+    }
+    
+    .gradient-text {
+      background: linear-gradient(135deg, #00CED1, #4B0082);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .profile-img {
+      width: 220px;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 6px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      margin: 0 auto;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    
+    .profile-img:hover {
+      transform: scale(1.05);
+    }
+    
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    
+    .skill-badge {
+      position: relative;
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border: 2px solid #00CED1;
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      overflow: hidden;
+    }
+    
+    .skill-badge::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 206, 209, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    .skill-badge:hover::before {
+      left: 100%;
+    }
+    
+    .skill-badge:hover {
+      transform: translateY(-2px) scale(1.02);
+      border-color: #4B0082;
+      box-shadow: 0 10px 15px -3px rgba(75, 0, 130, 0.2);
+    }
+    
+    .skill-badge i {
+      font-size: 28px;
+      color: #00CED1;
+      transition: transform 0.3s ease;
+    }
+    
+    .skill-badge:hover i {
+      transform: scale(1.1) rotate(5deg);
+    }
+    
+    .stat-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      color: white;
+      box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+      transition: transform 0.3s ease;
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-4px) scale(1.02);
+    }
+    
+    .stat-number {
+      font-size: 48px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 8px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    .timeline-item {
+      position: relative;
+      padding-left: 40px;
+      padding-bottom: 40px;
+    }
+    
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #00CED1, #4B0082);
+      box-shadow: 0 0 0 4px rgba(0, 206, 209, 0.2);
+    }
+    
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 16px;
+      width: 2px;
+      height: calc(100% - 16px);
+      background: linear-gradient(180deg, #00CED1, #4B0082);
+    }
+    
+    .timeline-item:last-child::after {
+      display: none;
+    }
+    
+    .project-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+    
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: #00CED1;
+      box-shadow: 0 20px 30px -5px rgba(0, 0, 0, 0.15);
+    }
+    
+    .project-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 24px;
+      color: white;
+    }
+    
+    .tech-tag {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      margin: 4px;
+      backdrop-filter: blur(10px);
+    }
+    
     .modal {
       display: none;
       position: fixed;
@@ -44,453 +231,1090 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
       justify-content: center;
       align-items: center;
-      z-index: 100;
-    }
-    .modal-content {
-      background: #fff;
+      z-index: 10000;
       padding: 20px;
-      border-radius: 8px;
-      max-width: 600px;
-      width: 90%;
     }
-    .dark-mode .modal-content { background: #374151; color: #F3F4F6; }
-    .tooltip {
-      visibility: hidden;
-      position: absolute;
-      background: #4B0082;
-      color: #fff;
-      padding: 8px;
-      border-radius: 4px;
-      font-size: 12px;
-      z-index: 10;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
+    
+    .modal-content {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      max-width: 700px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      animation: modalSlideIn 0.3s ease;
     }
-    .skill-card:hover .tooltip { visibility: visible; }
-    canvas { max-width: 100%; }
-    .profile-img {
-      border-radius: 50%;
+    
+    @keyframes modalSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .dark-mode .modal-content {
+      background: #1E293B;
+      color: #F1F5F9;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, #00CED1, #4B0082);
+      color: white;
+      padding: 12px 32px;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
       border: none;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      max-width: 200px;
-      height: auto;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 206, 209, 0.3);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 206, 209, 0.4);
+    }
+    
+    .btn-secondary {
+      background: white;
+      color: #4B0082;
+      padding: 12px 32px;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: 2px solid #4B0082;
+      cursor: pointer;
+    }
+    
+    .btn-secondary:hover {
+      background: #4B0082;
+      color: white;
+      transform: translateY(-2px);
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    
+    .section-title {
+      font-size: 42px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    
+    .section-subtitle {
+      font-size: 18px;
+      color: #6B7280;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+    
+    @keyframes floating {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .icon-circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #00CED1, #4B0082);
+      color: white;
+      font-size: 24px;
+      margin: 0 auto 16px;
+      box-shadow: 0 4px 15px rgba(0, 206, 209, 0.3);
+    }
+    
+    canvas {
+      max-width: 100%;
+      height: auto !important;
+    }
+    
+    .accordion-button {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: 600;
+      color: #1F2937;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0;
+    }
+    
+    .dark-mode .accordion-button {
+      color: #F1F5F9;
+    }
+    
+    .accordion-button::after {
+      content: '+';
+      font-size: 28px;
+      color: #00CED1;
+      transition: transform 0.3s ease;
+    }
+    
+    .accordion-button.active::after {
+      transform: rotate(45deg);
+    }
+    
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    
+    .accordion-content.active {
+      max-height: 500px;
+      margin-top: 16px;
+    }
+    
+    @media (max-width: 768px) {
+      .section-title {
+        font-size: 32px;
+      }
+      
+      .profile-img {
+        width: 180px;
+        height: 180px;
+      }
+      
+      .stat-number {
+        font-size: 36px;
+      }
     }
   </style>
 </head>
 <body>
   <div id="scrollProgress"></div>
-  <button id="darkModeToggle" class="fixed top-4 right-4 bg-indigo-800 text-white p-2 rounded-full hover:bg-indigo-700">
-    <i class="fas fa-moon"></i>
+  
+  <!-- Dark Mode Toggle -->
+  <button id="darkModeToggle" class="fixed top-6 right-6 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center">
+    <i class="fas fa-moon text-xl"></i>
   </button>
-  <section id="particles-js" class="relative bg-gradient-to-r from-indigo-800 to-cyan-500 text-white py-2 text-center">
+  
+  <!-- Hero Section -->
+  <section id="particles-js" class="relative gradient-bg text-white py-24 overflow-hidden">
     <div class="absolute inset-0"></div>
-    <div class="relative z-10">
-      <h1 class="animate text-4xl md:text-5xl font-bold">Monisha Murali</h1>
-      <p class="animate text-xl md:text-2xl mt-2">Data Analyst | Crafting Insights from Data</p>
-      <img src="https://raw.githubusercontent.com/MonishaMurali-26/data_analyst_profile/main/pic.jpg" alt="Monisha Murali Graduation" class="animate profile-img mt-2">
-      <div class="mt-2"></div>
+    <div class="relative z-10 max-w-6xl mx-auto px-4">
+      <div class="text-center">
+        <div class="inline-block mb-6 floating">
+          <img src="https://raw.githubusercontent.com/MonishaMurali-26/data_analyst_profile/main/pic.jpg" alt="Monisha Murali" class="profile-img">
+        </div>
+        <h1 class="text-5xl md:text-7xl font-bold heading-font mb-4 animate">Monisha Murali</h1>
+        <p class="text-xl md:text-3xl mb-6 animate font-light">Data Analyst | Transforming Data into Strategic Insights</p>
+        <div class="flex flex-wrap justify-center gap-4 mt-8 animate">
+          <a href="#contact" class="btn-primary">Get In Touch</a>
+          <a href="#projects" class="btn-secondary">View Projects</a>
+        </div>
+      </div>
     </div>
   </section>
-  <section class="py-16 px-4 bg-white">
+  
+  <!-- About Section -->
+  <section class="py-20 px-4 bg-white dark-mode-section">
+    <div class="max-w-6xl mx-auto">
+      <div class="section-header animate">
+        <h2 class="section-title heading-font gradient-text">About Me</h2>
+        <p class="section-subtitle text-gray-600">Passionate about turning complex data into actionable business intelligence</p>
+      </div>
+      
+      <div class="card animate max-w-4xl mx-auto mb-12">
+        <p class="text-lg text-gray-700 leading-relaxed">
+          Results-driven Data Analyst with 2+ years of experience specializing in financial reporting, data integration, and interactive dashboard development. Expert in leveraging SQL, Python, Power BI, and Tableau to transform complex datasets into actionable insights through advanced visualization, statistical modeling, and process automation. Proven track record of delivering measurable business impact through data-driven decision-making.
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="stat-card animate">
+          <div class="stat-number">2+</div>
+          <p class="text-lg font-semibold">Years Experience</p>
+          <p class="text-sm opacity-90 mt-2">In Data Analytics</p>
+        </div>
+        <div class="stat-card animate" style="background: linear-gradient(135deg, #00CED1 0%, #4B0082 100%);">
+          <div class="stat-number">50+</div>
+          <p class="text-lg font-semibold">Dashboards Created</p>
+          <p class="text-sm opacity-90 mt-2">Across Multiple Platforms</p>
+        </div>
+        <div class="stat-card animate" style="background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);">
+          <div class="stat-number">40%</div>
+          <p class="text-lg font-semibold">Efficiency Boost</p>
+          <p class="text-sm opacity-90 mt-2">Average Improvement</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Skills Section -->
+  <section class="py-20 px-4 bg-gray-50 dark-mode-section">
+    <div class="max-w-6xl mx-auto">
+      <div class="section-header animate">
+        <h2 class="section-title heading-font gradient-text">Technical Expertise</h2>
+        <p class="section-subtitle text-gray-600">Comprehensive toolkit for modern data analytics</p>
+      </div>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="skill-badge animate">
+          <i class="fas fa-database"></i>
+          <div>
+            <div class="font-semibold text-gray-800">SQL</div>
+            <div class="text-xs text-gray-600">Query Optimization</div>
+          </div>
+        </div>
+        
+        <div class="skill-badge animate">
+          <i class="fab fa-python"></i>
+          <div>
+            <div class="font-semibold text-gray-800">Python</div>
+            <div class="text-xs text-gray-600">Data Analysis</div>
+          </div>
+        </div>
+        
+        <div class="skill-badge animate">
+          <i class="fas fa-chart-bar"></i>
+          <div>
+            <div class="font-semibold text-gray-800">Power BI</div>
+            <div class="text-xs text-gray-600">Dashboard Design</div>
+          </div>
+        </div>
+        
+        <div class="skill-badge animate">
+          <i class="fas fa-chart-pie"></i>
+          <div>
+            <div class="font-semibold text-gray-800">Tableau</div>
+            <div class="text-xs text-gray-600">Data Visualization</div>
+          </div>
+        </div>
+        
+        <div class="skill-badge animate">
+          <i class="fab fa-r-project"></i>
+          <div>
+            <div class="font-semibold text-gray-800">R</div>
+            <div class="text-xs text-gray-600">Statistical Analysis</div>
+          </div>
+        </div>
+        
+        <div class="skill-badge animate">
+          <i class="fas fa-table"></i>
+          <div>
+            <div class="font-semibold text-gray-800">Pandas</div>
+            <div class="text-xs text-gray-600">Data Manipulation</div>
+          </div>
+        </div>
+        
+        <div class="skill-badge animate">
+          <i class="fas fa-calculator"></i>
+          <div>
+            <div class="font-semibold text-gray-800">NumPy</div>
+            <div class="text-xs text-gray-600">Numerical Computing</div>
+          </div>
+        </div>
+        
+        <div class="skill-badge animate">
+          <i class="fas fa-book"></i>
+          <div>
+            <div class="font-semibold text-gray-800">Jupyter</div>
+            <div class="text-xs text-gray-600">Interactive Analysis</div>
+          </div>
+        </div>
+        
+        <div class="skill-badge animate">
+          <i class="fas fa-database"></i>
+          <div>
+            <div class="font-semibold text-gray-800">MySQL</div>
+            <div class="text-xs text-gray-600">Database Management</div>
+          </div>
+        </div>
+        
+        <div class="skill-badge animate">
+          <i class="fas fa-server"></i>
+          <div>
+            <div class="font-semibold text-gray-800">Oracle</div>
+            <div class="text-xs text-gray-600">Enterprise Systems</div>
+          </div>
+        </div>
+        
+        <div class="skill-badge animate">
+          <i class="fas fa-snowflake"></i>
+          <div>
+            <div class="font-semibold text-gray-800">Snowflake</div>
+            <div class="text-xs text-gray-600">Cloud Warehousing</div>
+          </div>
+        </div>
+        
+        <div class="skill-badge animate">
+          <i class="fas fa-fire"></i>
+          <div>
+            <div class="font-semibold text-gray-800">Apache Spark</div>
+            <div class="text-xs text-gray-600">Big Data Processing</div>
+          </div>
+        </div>
+        
+        <div class="skill-badge animate">
+          <i class="fab fa-aws"></i>
+          <div>
+            <div class="font-semibold text-gray-800">AWS</div>
+            <div class="text-xs text-gray-600">Cloud Analytics</div>
+          </div>
+        </div>
+        
+        <div class="skill-badge animate">
+          <i class="fab fa-google"></i>
+          <div>
+            <div class="font-semibold text-gray-800">GCP</div>
+            <div class="text-xs text-gray-600">Cloud Pipelines</div>
+          </div>
+        </div>
+        
+        <div class="skill-badge animate">
+          <i class="fas fa-exchange-alt"></i>
+          <div>
+            <div class="font-semibold text-gray-800">ETL</div>
+            <div class="text-xs text-gray-600">Data Integration</div>
+          </div>
+        </div>
+        
+        <div class="skill-badge animate">
+          <i class="fas fa-brain"></i>
+          <div>
+            <div class="font-semibold text-gray-800">Machine Learning</div>
+            <div class="text-xs text-gray-600">Predictive Models</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Experience Section -->
+  <section class="py-20 px-4 bg-white dark-mode-section">
+    <div class="max-w-6xl mx-auto">
+      <div class="section-header animate">
+        <h2 class="section-title heading-font gradient-text">Professional Experience</h2>
+        <p class="section-subtitle text-gray-600">Driving business success through data-driven solutions</p>
+      </div>
+      
+      <div class="max-w-4xl mx-auto">
+        <div class="timeline-item animate">
+          <div class="card">
+            <button class="accordion-button" onclick="toggleAccordion(this)">
+              <div>
+                <h3 class="text-2xl font-bold mb-1">Data Analyst</h3>
+                <p class="text-gray-600">Northwest Missouri State University, MO</p>
+              </div>
+              <span class="text-gray-400">May 2024 - Present</span>
+            </button>
+            <div class="accordion-content">
+              <ul class="space-y-3 text-gray-700">
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                  <span>Developed comprehensive trend analysis reports, reducing processing delays by 12% through optimized data workflows</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                  <span>Built predictive models using Python and statistical techniques, improving forecasting accuracy by 20%</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                  <span>Delivered interactive Power BI dashboards with real-time KPI tracking, boosting decision-making efficiency by 35%</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                  <span>Streamlined ETL pipelines, increasing data integration speed by 40% across multiple systems</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="timeline-item animate">
+          <div class="card">
+            <button class="accordion-button" onclick="toggleAccordion(this)">
+              <div>
+                <h3 class="text-2xl font-bold mb-1">Business Intelligence Analyst</h3>
+                <p class="text-gray-600">Accenture, Bangalore, India</p>
+              </div>
+              <span class="text-gray-400">Aug 2022 - Dec 2023</span>
+            </button>
+            <div class="accordion-content">
+              <ul class="space-y-3 text-gray-700">
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                  <span>Created 50+ interactive dashboards for KPI monitoring, reducing report delivery time by 60%</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                  <span>Reduced data processing time by 40% through optimized Informatica ETL pipelines</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                  <span>Enhanced data workflows, increasing processing speed by 50% through automation</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                  <span>Built Python-based predictive models for trend forecasting and business planning</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Projects Section -->
+  <section class="py-20 px-4 bg-gray-50 dark-mode-section">
+    <div class="max-w-6xl mx-auto">
+      <div class="section-header animate">
+        <h2 class="section-title heading-font gradient-text">Featured Projects</h2>
+        <p class="section-subtitle text-gray-600">Innovative solutions delivering measurable business impact</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div class="project-card animate">
+          <div class="project-header">
+            <h3 class="text-2xl font-bold mb-2">Sales Performance & Forecasting</h3>
+            <div class="flex flex-wrap gap-2 mb-3">
+              <span class="tech-tag">Power BI</span>
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">SQL</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="space-y-3 mb-4">
+              <div class="flex items-center text-green-600">
+                <i class="fas fa-arrow-up mr-2"></i>
+                <span class="font-semibold">15% increase in deal closures</span>
+              </div>
+              <div class="flex items-center text-green-600">
+                <i class="fas fa-arrow-down mr-2"></i>
+                <span class="font-semibold">30% reduction in stock-outs</span>
+              </div>
+            </div>
+            <p class="text-gray-700 mb-4">Interactive dashboard with predictive analytics for sales KPI tracking and demand forecasting.</p>
+            <div class="flex gap-3">
+              <button class="btn-primary text-sm py-2 px-4" onclick="openModal('modal1')">View Details</button>
+              <a href="https://github.com/MonishaMurali-26/sales-performance-forecasting" class="btn-secondary text-sm py-2 px-4" target="_blank">
+                <i class="fab fa-github mr-2"></i>GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project-card animate">
+          <div class="project-header">
+            <h3 class="text-2xl font-bold mb-2">Vehicle Data Management System</h3>
+            <div class="flex flex-wrap gap-2 mb-3">
+              <span class="tech-tag">Flask</span>
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">SQLAlchemy</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="space-y-3 mb-4">
+              <div class="flex items-center text-green-600">
+                <i class="fas fa-arrow-up mr-2"></i>
+                <span class="font-semibold">25% improved reporting accuracy</span>
+              </div>
+              <div class="flex items-center text-blue-600">
+                <i class="fas fa-car mr-2"></i>
+                <span class="font-semibold">120+ vehicles managed</span>
+              </div>
+            </div>
+            <p class="text-gray-700 mb-4">Comprehensive web application for vehicle data management with analytics dashboards.</p>
+            <div class="flex gap-3">
+              <button class="btn-primary text-sm py-2 px-4" onclick="openModal('modal2')">View Details</button>
+              <a href="https://github.com/MonishaMurali-26/NorthWest_Vehicle_Mngnt" class="btn-secondary text-sm py-2 px-4" target="_blank">
+                <i class="fab fa-github mr-2"></i>GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project-card animate">
+          <div class="project-header">
+            <h3 class="text-2xl font-bold mb-2">Customer Segmentation Analysis</h3>
+            <div class="flex flex-wrap gap-2 mb-3">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Pandas</span>
+              <span class="tech-tag">Tableau</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="space-y-3 mb-4">
+              <div class="flex items-center text-green-600">
+                <i class="fas fa-arrow-up mr-2"></i>
+                <span class="font-semibold">18% boost in customer engagement</span>
+              </div>
+              <div class="flex items-center text-purple-600">
+                <i class="fas fa-users mr-2"></i>
+                <span class="font-semibold">Advanced clustering algorithms</span>
+              </div>
+            </div>
+            <p class="text-gray-700 mb-4">Machine learning-powered customer segmentation with interactive Tableau visualizations.</p>
+            <div class="flex gap-3">
+              <button class="btn-primary text-sm py-2 px-4" onclick="openModal('modal3')">View Details</button>
+              <a href="https://github.com/MonishaMurali-26/customer-segmentation-analysis" class="btn-secondary text-sm py-2 px-4" target="_blank">
+                <i class="fab fa-github mr-2"></i>GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project-card animate">
+          <div class="project-header">
+            <h3 class="text-2xl font-bold mb-2">Financial Reporting Automation</h3>
+            <div class="flex flex-wrap gap-2 mb-3">
+              <span class="tech-tag">SQL</span>
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Excel</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="space-y-3 mb-4">
+              <div class="flex items-center text-green-600">
+                <i class="fas fa-arrow-down mr-2"></i>
+                <span class="font-semibold">45% faster report generation</span>
+              </div>
+              <div class="flex items-center text-blue-600">
+                <i class="fas fa-robot mr-2"></i>
+                <span class="font-semibold">Fully automated workflow</span>
+              </div>
+            </div>
+            <p class="text-gray-700 mb-4">End-to-end automation of monthly financial reports with SQL queries and Python scripts.</p>
+            <div class="flex gap-3">
+              <button class="btn-primary text-sm py-2 px-4" onclick="openModal('modal4')">View Details</button>
+              <a href="https://github.com/MonishaMurali-26/financial-reporting-automation" class="btn-secondary text-sm py-2 px-4" target="_blank">
+                <i class="fab fa-github mr-2"></i>GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Impact Chart -->
+      <div class="card animate">
+        <h3 class="text-2xl font-bold text-center mb-6 gradient-text">Project Impact Metrics</h3>
+        <div class="max-w-3xl mx-auto">
+          <canvas id="impactChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Education Section -->
+  <section class="py-20 px-4 bg-white dark-mode-section">
+    <div class="max-w-6xl mx-auto">
+      <div class="section-header animate">
+        <h2 class="section-title heading-font gradient-text">Education & Certifications</h2>
+        <p class="section-subtitle text-gray-600">Continuous learning and professional development</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div class="card animate">
+          <div class="icon-circle">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          <h3 class="text-xl font-bold text-center mb-2">Master of Science</h3>
+          <p class="text-center text-gray-600 mb-2">Information Systems</p>
+          <p class="text-center text-sm text-gray-500">Northwest Missouri State University</p>
+          <p class="text-center text-sm text-gray-500">Jan 2024 - May 2025</p>
+        </div>
+        
+        <div class="card animate">
+          <div class="icon-circle" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+            <i class="fas fa-university"></i>
+          </div>
+          <h3 class="text-xl font-bold text-center mb-2">Bachelor's in Engineering</h3>
+          <p class="text-center text-gray-600 mb-2">Computer Science</p>
+          <p class="text-center text-sm text-gray-500">Acharya Institute of Technology, India</p>
+          <p class="text-center text-sm text-gray-500">Aug 2018 - Jul 2022</p>
+        </div>
+      </div>
+      
+      <div class="card animate max-w-4xl mx-auto mt-8">
+        <div class="icon-circle" style="background: linear-gradient(135deg, #00CED1 0%, #4B0082 100%);">
+          <i class="fas fa-certificate"></i>
+        </div>
+        <h3 class="text-2xl font-bold text-center mb-6">Professional Certifications</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="flex items-start space-x-3">
+            <i class="fas fa-badge-check text-2xl text-green-500 mt-1"></i>
+            <div>
+              <p class="font-semibold text-gray-800">Microsoft Certified Power BI Data Analyst Associate</p>
+              <p class="text-sm text-gray-600">Advanced dashboard and reporting expertise</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <i class="fas fa-badge-check text-2xl text-blue-500 mt-1"></i>
+            <div>
+              <p class="font-semibold text-gray-800">Google Data Analytics Professional Certificate</p>
+              <p class="text-sm text-gray-600">Comprehensive data analysis foundations</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 px-4 gradient-bg text-white">
     <div class="max-w-4xl mx-auto text-center">
-      <h2 class="animate text-3xl font-bold mb-6 text-indigo-800">About Me</h2>
-      <p class="animate text-lg text-gray-700 mb-6">
-        Results-driven Data Analyst with 2 years of experience in financial reporting, data integration, and dashboard development. Skilled in SQL, Python, Power BI, and Tableau, I excel at transforming complex datasets into actionable insights through advanced visualization, modeling, and automation.
-      </p>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="bg-gray-50 p-4 rounded-lg shadow-md">
-          <p class="text-2xl font-bold text-cyan-500">2+</p>
-          <p class="text-gray-700">Years of Experience</p>
-        </div>
-        <div class="bg-gray-50 p-4 rounded-lg shadow-md">
-          <p class="text-2xl font-bold text-cyan-500">Expert</p>
-          <p class="text-gray-700">SQL Proficiency</p>
-        </div>
-        <div class="bg-gray-50 p-4 rounded-lg shadow-md">
-          <p class="text-2xl font-bold text-cyan-500">Advanced</p>
-          <p class="text-gray-700">Python Proficiency</p>
+      <div class="animate">
+        <h2 class="text-5xl font-bold heading-font mb-6">Let's Connect</h2>
+        <p class="text-xl mb-12 opacity-90">Ready to collaborate on data-driven projects? Reach out to discuss opportunities!</p>
+        
+        <div class="flex flex-col sm:flex-row justify-center gap-6">
+          <button id="copyEmail" class="bg-white text-indigo-800 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl flex items-center justify-center space-x-3">
+            <i class="fas fa-envelope text-xl"></i>
+            <span>monishagowda685@gmail.com</span>
+          </button>
+          
+          <a href="https://www.linkedin.com/in/monishamural" target="_blank" class="bg-blue-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl flex items-center justify-center space-x-3">
+            <i class="fab fa-linkedin text-xl"></i>
+            <span>Connect on LinkedIn</span>
+          </a>
         </div>
       </div>
     </div>
   </section>
-  <section class="py-16 px-4 bg-gray-100">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="animate text-3xl font-bold text-center mb-6 text-indigo-800">Skills</h2>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
-          <i class="fas fa-database text-cyan-500"></i>
-          <span class="text-gray-700">SQL</span>
-          <span class="tooltip">Optimized queries for 40% faster reporting</span>
-        </div>
-        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
-          <i class="fab fa-python text-cyan-500"></i>
-          <span class="text-gray-700">Python</span>
-          <span class="tooltip">Built predictive models and ETL pipelines</span>
-        </div>
-        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
-          <i class="fas fa-chart-bar text-cyan-500"></i>
-          <span class="text-gray-700">Power BI</span>
-          <span class="tooltip">Created real-time KPI dashboards</span>
-        </div>
-        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
-          <i class="fas fa-chart-pie text-cyan-500"></i>
-          <span class="text-gray-700">Tableau</span>
-          <span class="tooltip">Visualized customer segmentation</span>
-        </div>
-        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
-          <i class="fab fa-r-project text-cyan-500"></i>
-          <span class="text-gray-700">R</span>
-          <span class="tooltip">Statistical analysis and forecasting</span>
-        </div>
-        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
-          <i class="fas fa-table text-cyan-500"></i>
-          <span class="text-gray-700">Pandas</span>
-          <span class="tooltip">Data manipulation and cleaning</span>
-        </div>
-        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
-          <i class="fas fa-calculator text-cyan-500"></i>
-          <span class="text-gray-700">NumPy</span>
-          <span class="tooltip">Numerical computations for analytics</span>
-        </div>
-        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
-          <i class="fas fa-book text-cyan-500"></i>
-          <span class="text-gray-700">Jupyter Notebook</span>
-          <span class="tooltip">Interactive data analysis</span>
-        </div>
-        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
-          <i class="fas fa-database text-cyan-500"></i>
-          <span class="text-gray-700">MySQL</span>
-          <span class="tooltip">Managed relational databases</span>
-        </div>
-        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
-          <i class="fas fa-server text-cyan-500"></i>
-          <span class="text-gray-700">Oracle</span>
-          <span class="tooltip">Enterprise database management</span>
-        </div>
-        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
-          <i class="fas fa-cloud text-cyan-500"></i>
-          <span class="text-gray-700">Snowflake</span>
-          <span class="tooltip">Cloud-based data warehousing</span>
-        </div>
-        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
-          <i class="fas fa-fire text-cyan-500"></i>
-          <span class="text-gray-700">Apache Spark</span>
-          <span class="tooltip">Big data processing</span>
-        </div>
-        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
-          <i class="fab fa-aws text-cyan-500"></i>
-          <span class="text-gray-700">AWS</span>
-          <span class="tooltip">Cloud data storage and analytics</span>
-        </div>
-        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
-          <i class="fab fa-google text-cyan-500"></i>
-          <span class="text-gray-700">GCP</span>
-          <span class="tooltip">Cloud-based data pipelines</span>
-        </div>
-        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
-          <i class="fas fa-exchange-alt text-cyan-500"></i>
-          <span class="text-gray-700">ETL Pipelines</span>
-          <span class="tooltip">Streamlined data integration</span>
-        </div>
-        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
-          <i class="fas fa-warehouse text-cyan-500"></i>
-          <span class="text-gray-700">Data Warehousing</span>
-          <span class="tooltip">Designed scalable data storage</span>
-        </div>
-        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
-          <i class="fas fa-project-diagram text-cyan-500"></i>
-          <span class="text-gray-700">Data Modeling</span>
-          <span class="tooltip">Structured data for analysis</span>
-        </div>
-        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
-          <i class="fas fa-broom text-cyan-500"></i>
-          <span class="text-gray-700">Data Cleaning</span>
-          <span class="tooltip">Ensured data quality</span>
-        </div>
-        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
-          <i class="fas fa-chart-line text-cyan-500"></i>
-          <span class="text-gray-700">Statistical Analysis</span>
-          <span class="tooltip">Derived insights from data</span>
-        </div>
-        <div class="animate skill-card relative bg-white p-4 rounded-lg shadow-md flex items-center space-x-2 hover:scale-105 transition-transform">
-          <i class="fas fa-brain text-cyan-500"></i>
-          <span class="text-gray-700">Machine Learning Basics</span>
-          <span class="tooltip">Applied clustering and prediction</span>
-        </div>
+  
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-400 py-8 text-center">
+    <p>&copy; 2025 Monisha Murali. All rights reserved.</p>
+    <p class="mt-2">Crafted with passion for data analytics</p>
+  </footer>
+  
+  <!-- Modals -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <div class="flex justify-between items-start mb-6">
+        <h3 class="text-3xl font-bold gradient-text">Sales Performance & Forecasting Dashboard</h3>
+        <button onclick="closeModal('modal1')" class="text-3xl text-gray-400 hover:text-gray-600">&times;</button>
       </div>
-    </div>
-  </section>
-  <section class="py-16 px-4 bg-white">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="animate text-3xl font-bold text-center mb-6 text-indigo-800">Experience</h2>
+      
       <div class="space-y-4">
-        <div class="animate bg-gray-50 p-6 rounded-lg shadow-md">
-          <button class="w-full text-left text-xl font-semibold text-gray-700 hover:text-indigo-800" onclick="toggleAccordion(this)">Data Analyst</button>
-          <div class="accordion-content hidden">
-            <p class="text-gray-600">Northwest Missouri State University, MO | May 2024 - Present</p>
-            <ul class="list-disc ml-6 mt-2 text-gray-700">
-              <li>Developed trend analysis reports, reducing processing delays by 12%.</li>
-              <li>Built predictive models, improving forecasting accuracy by 20%.</li>
-              <li>Delivered Power BI dashboards, boosting decision-making efficiency by 35%.</li>
-              <li>Streamlined ETL pipelines, increasing data integration speed by 40%.</li>
-            </ul>
+        <div>
+          <h4 class="font-bold text-lg mb-2 flex items-center">
+            <i class="fas fa-tools text-cyan-500 mr-2"></i>
+            Technologies Used
+          </h4>
+          <div class="flex flex-wrap gap-2">
+            <span class="tech-tag bg-cyan-500 text-white">Power BI</span>
+            <span class="tech-tag bg-purple-500 text-white">Python</span>
+            <span class="tech-tag bg-blue-500 text-white">SQL</span>
           </div>
         </div>
-        <div class="animate bg-gray-50 p-6 rounded-lg shadow-md">
-          <button class="w-full text-left text-xl font-semibold text-gray-700 hover:text-indigo-800" onclick="toggleAccordion(this)">Business Intelligence Analyst</button>
-          <div class="accordion-content hidden">
-            <p class="text-gray-600">Accenture, Bangalore, India | Aug 2022 - Dec 2023</p>
-            <ul class="list-disc ml-6 mt-2 text-gray-700">
-              <li>Created 50+ dashboards for KPI monitoring, reducing report delivery time by 60%.</li>
-              <li>Reduced data processing time by 40% using Informatica.</li>
-              <li>Enhanced data workflows, increasing speed by 50%.</li>
-              <li>Built Python-based predictive models for trend forecasting.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="py-16 px-4 bg-gray-100">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="animate text-3xl font-bold text-center mb-6 text-indigo-800">Projects</h2>
-      <div class="space-y-8">
-        <div class="animate bg-white p-6 rounded-lg shadow-md flex justify-between items-center">
-          <div>
-            <h3 class="text-xl font-semibold">Sales Performance & Forecasting Dashboard</h3>
-            <p class="text-gray-600">Tech: Power BI, Python, SQL</p>
-            <p class="text-gray-700 mt-2">Increased deal closures by 15% with a sales dashboard. Reduced stock-outs by 30% via demand prediction. <a href="https://github.com/MonishaMurali-26/sales-performance-forecasting" class="text-cyan-500 underline">View on GitHub</a></p>
-          </div>
-          <button class="bg-cyan-500 text-white px-4 py-2 rounded hover:bg-cyan-600" onclick="openModal('modal1')">View Details</button>
-        </div>
-        <div class="animate bg-white p-6 rounded-lg shadow-md flex justify-between items-center">
-          <div>
-            <h3 class="text-xl font-semibold">Vehicle Data Management & Reporting System</h3>
-            <p class="text-gray-600">Tech: Flask, Python, SQLAlchemy</p>
-            <p class="text-gray-700 mt-2">Managed data for 120+ vehicles, improving reporting accuracy by 25%. <a href="https://github.com/MonishaMurali-26/NorthWest_Vehicle_Mngnt" class="text-cyan-500 underline">View on GitHub</a></p>
-          </div>
-          <button class="bg-cyan-500 text-white px-4 py-2 rounded hover:bg-cyan-600" onclick="openModal('modal2')">View Details</button>
-        </div>
-        <div class="animate bg-white p-6 rounded-lg shadow-md flex justify-between items-center">
-          <div>
-            <h3 class="text-xl font-semibold">Customer Segmentation Analysis</h3>
-            <p class="text-gray-600">Tech: Python, Pandas, Tableau</p>
-            <p class="text-gray-700 mt-2">Boosted customer engagement by 18% with clustering and Tableau visualizations. <a href="https://github.com/MonishaMurali-26/customer-segmentation-analysis" class="text-cyan-500 underline">View on GitHub</a></p>
-          </div>
-          <button class="bg-cyan-500 text-white px-4 py-2 rounded hover:bg-cyan-600" onclick="openModal('modal3')">View Details</button>
-        </div>
-        <div class="animate bg-white p-6 rounded-lg shadow-md flex justify-between items-center">
-          <div>
-            <h3 class="text-xl font-semibold">Financial Reporting Automation</h3>
-            <p class="text-gray-600">Tech: SQL, Python, Excel</p>
-            <p class="text-gray-700 mt-2">Automated reports, reducing generation time by 45%. <a href="https://github.com/MonishaMurali-26/financial-reporting-automation" class="text-cyan-500 underline">View on GitHub</a></p>
-          </div>
-          <button class="bg-cyan-500 text-white px-4 py-2 rounded hover:bg-cyan-600" onclick="openModal('modal4')">View Details</button>
-        </div>
-      </div>
-      <div class="mt-8 chart-container">
-        <h3 class="text-2xl font-semibold text-center mb-4 text-indigo-800">Key Project Impacts</h3>
-        <canvas id="impactChart" class="mx-auto"></canvas>
-      </div>
-    </div>
-    <div id="modal1" class="modal">
-      <div class="modal-content">
-        <h3 class="text-xl font-semibold">Sales Performance & Forecasting Dashboard</h3>
-        <p class="text-gray-700 mt-2"><strong>Tech:</strong> Power BI, Python, SQL</p>
-        <p class="text-gray-700 mt-2"><strong>Impact:</strong> Increased deal closures by 15%, reduced stock-outs by 30%, and cut manual processing by 50%.</p>
-        <p class="text-gray-700 mt-2"><strong>Details:</strong> Designed an interactive dashboard to track sales KPIs and implemented a demand prediction model using Python.</p>
-        <button class="bg-indigo-800 text-white px-4 py-2 rounded mt-4 hover:bg-indigo-700" onclick="closeModal('modal1')">Close</button>
-      </div>
-    </div>
-    <div id="modal2" class="modal">
-      <div class="modal-content">
-        <h3 class="text-xl font-semibold">Vehicle Data Management & Reporting System</h3>
-        <p class="text-gray-700 mt-2"><strong>Tech:</strong> Flask, Python, SQLAlchemy</p>
-        <p class="text-gray-700 mt-2"><strong>Impact:</strong> Improved reporting accuracy by 25% for 120+ vehicles.</p>
-        <p class="text-gray-700 mt-2"><strong>Details:</strong> Built a web app to manage vehicle data, with dashboards for fuel efficiency and maintenance trends.</p>
-        <button class="bg-indigo-800 text-white px-4 py-2 rounded mt-4 hover:bg-indigo-700" onclick="closeModal('modal2')">Close</button>
-      </div>
-    </div>
-    <div id="modal3" class="modal">
-      <div class="modal-content">
-        <h3 class="text-xl font-semibold">Customer Segmentation Analysis</h3>
-        <p class="text-gray-700 mt-2"><strong>Tech:</strong> Python, Pandas, Tableau</p>
-        <p class="text-gray-700 mt-2"><strong>Impact:</strong> Increased customer engagement by 18%.</p>
-        <p class="text-gray-700 mt-2"><strong>Details:</strong> Applied clustering algorithms to segment customers and visualized results in Tableau for marketing strategies.</p>
-        <button class="bg-indigo-800 text-white px-4 py-2 rounded mt-4 hover:bg-indigo-700" onclick="closeModal('modal3')">Close</button>
-      </div>
-    </div>
-    <div id="modal4" class="modal">
-      <div class="modal-content">
-        <h3 class="text-xl font-semibold">Financial Reporting Automation</h3>
-        <p class="text-gray-700 mt-2"><strong>Tech:</strong> SQL, Python, Excel</p>
-        <p class="text-gray-700 mt-2"><strong>Impact:</strong> Reduced report generation time by 45%.</p>
-        <p class="text-gray-700 mt-2"><strong>Details:</strong> Automated monthly financial reports with SQL and Python, integrating outputs into Excel.</p>
-        <button class="bg-indigo-800 text-white px-4 py-2 rounded mt-4 hover:bg-indigo-700" onclick="closeModal('modal4')">Close</button>
-      </div>
-    </div>
-  </section>
-  <section class="py-16 px-4 bg-white">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="animate text-3xl font-bold text-center mb-6 text-indigo-800">Education & Certifications</h2>
-      <div class="space-y-6">
-        <div class="animate bg-gray-50 p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold">Master of Science in Information Systems</h3>
-          <p class="text-gray-600">Northwest Missouri State University, MO | Jan 2024 - May 2025</p>
-        </div>
-        <div class="animate bg-gray-50 p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold">Bachelor's in Engineering</h3>
-          <p class="text-gray-600">Acharya Institute of Technology, India | Aug 2018 - Jul 2022</p>
-        </div>
-        <div class="animate bg-gray-50 p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold">Certifications</h3>
-          <ul class="list-disc ml-6 text-gray-700">
-            <li>Microsoft Certified Power BI Data Analyst Associate</li>
-            <li>Google Data Analytics Professional Certificate</li>
+        
+        <div>
+          <h4 class="font-bold text-lg mb-2 flex items-center">
+            <i class="fas fa-chart-line text-green-500 mr-2"></i>
+            Key Achievements
+          </h4>
+          <ul class="space-y-2">
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+              <span>15% increase in deal closures through real-time sales tracking</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+              <span>30% reduction in stock-outs via predictive demand forecasting</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+              <span>50% decrease in manual report processing time</span>
+            </li>
           </ul>
         </div>
+        
+        <div>
+          <h4 class="font-bold text-lg mb-2 flex items-center">
+            <i class="fas fa-info-circle text-blue-500 mr-2"></i>
+            Project Details
+          </h4>
+          <p class="text-gray-700">Designed and implemented an interactive Power BI dashboard that tracks critical sales KPIs in real-time. Integrated Python-based machine learning models for demand prediction, enabling proactive inventory management and strategic sales planning.</p>
+        </div>
       </div>
-    </div>
-  </section>
-  <section class="py-16 px-4 bg-gray-100 text-center">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="animate text-3xl font-bold mb-6 text-indigo-800">Contact</h2>
-      <p class="animate text-lg text-gray-700 mb-4">Let's connect to explore data analytics opportunities!</p>
-      <div class="flex justify-center space-x-4">
-        <button id="copyEmail" class="animate bg-cyan-500 text-white px-6 py-3 rounded-lg hover:bg-cyan-600 transition flex items-center space-x-2">
-          <i class="fas fa-envelope"></i>
-          <span>Copy Email</span>
-        </button>
-        <a href="https://www.linkedin.com/in/monishamural" class="animate bg-indigo-800 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition flex items-center space-x-2">
-          <i class="fab fa-linkedin"></i>
-          <span>LinkedIn</span>
+      
+      <div class="mt-8 flex justify-end gap-3">
+        <a href="https://github.com/MonishaMurali-26/sales-performance-forecasting" class="btn-secondary" target="_blank">
+          <i class="fab fa-github mr-2"></i>View on GitHub
         </a>
+        <button class="btn-primary" onclick="closeModal('modal1')">Close</button>
       </div>
     </div>
-  </section>
+  </div>
+  
+  <div id="modal2" class="modal">
+    <div class="modal-content">
+      <div class="flex justify-between items-start mb-6">
+        <h3 class="text-3xl font-bold gradient-text">Vehicle Data Management System</h3>
+        <button onclick="closeModal('modal2')" class="text-3xl text-gray-400 hover:text-gray-600">&times;</button>
+      </div>
+      
+      <div class="space-y-4">
+        <div>
+          <h4 class="font-bold text-lg mb-2 flex items-center">
+            <i class="fas fa-tools text-cyan-500 mr-2"></i>
+            Technologies Used
+          </h4>
+          <div class="flex flex-wrap gap-2">
+            <span class="tech-tag bg-green-500 text-white">Flask</span>
+            <span class="tech-tag bg-purple-500 text-white">Python</span>
+            <span class="tech-tag bg-orange-500 text-white">SQLAlchemy</span>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="font-bold text-lg mb-2 flex items-center">
+            <i class="fas fa-chart-line text-green-500 mr-2"></i>
+            Key Achievements
+          </h4>
+          <ul class="space-y-2">
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+              <span>25% improvement in reporting accuracy for 120+ vehicles</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+              <span>Comprehensive dashboards for fuel efficiency tracking</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+              <span>Automated maintenance trend analysis</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="font-bold text-lg mb-2 flex items-center">
+            <i class="fas fa-info-circle text-blue-500 mr-2"></i>
+            Project Details
+          </h4>
+          <p class="text-gray-700">Built a full-stack web application using Flask for managing vehicle fleet data. Implemented SQLAlchemy for robust database management and created analytical dashboards to visualize fuel consumption patterns, maintenance schedules, and cost optimization opportunities.</p>
+        </div>
+      </div>
+      
+      <div class="mt-8 flex justify-end gap-3">
+        <a href="https://github.com/MonishaMurali-26/NorthWest_Vehicle_Mngnt" class="btn-secondary" target="_blank">
+          <i class="fab fa-github mr-2"></i>View on GitHub
+        </a>
+        <button class="btn-primary" onclick="closeModal('modal2')">Close</button>
+      </div>
+    </div>
+  </div>
+  
+  <div id="modal3" class="modal">
+    <div class="modal-content">
+      <div class="flex justify-between items-start mb-6">
+        <h3 class="text-3xl font-bold gradient-text">Customer Segmentation Analysis</h3>
+        <button onclick="closeModal('modal3')" class="text-3xl text-gray-400 hover:text-gray-600">&times;</button>
+      </div>
+      
+      <div class="space-y-4">
+        <div>
+          <h4 class="font-bold text-lg mb-2 flex items-center">
+            <i class="fas fa-tools text-cyan-500 mr-2"></i>
+            Technologies Used
+          </h4>
+          <div class="flex flex-wrap gap-2">
+            <span class="tech-tag bg-purple-500 text-white">Python</span>
+            <span class="tech-tag bg-blue-500 text-white">Pandas</span>
+            <span class="tech-tag bg-orange-500 text-white">Tableau</span>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="font-bold text-lg mb-2 flex items-center">
+            <i class="fas fa-chart-line text-green-500 mr-2"></i>
+            Key Achievements
+          </h4>
+          <ul class="space-y-2">
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+              <span>18% boost in customer engagement through targeted strategies</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+              <span>Advanced K-means and hierarchical clustering algorithms</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+              <span>Interactive Tableau visualizations for marketing insights</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="font-bold text-lg mb-2 flex items-center">
+            <i class="fas fa-info-circle text-blue-500 mr-2"></i>
+            Project Details
+          </h4>
+          <p class="text-gray-700">Applied machine learning clustering algorithms to segment customers based on purchasing behavior, demographics, and engagement patterns. Created comprehensive Tableau dashboards to visualize customer segments, enabling data-driven marketing strategies and personalized customer experiences.</p>
+        </div>
+      </div>
+      
+      <div class="mt-8 flex justify-end gap-3">
+        <a href="https://github.com/MonishaMurali-26/customer-segmentation-analysis" class="btn-secondary" target="_blank">
+          <i class="fab fa-github mr-2"></i>View on GitHub
+        </a>
+        <button class="btn-primary" onclick="closeModal('modal3')">Close</button>
+      </div>
+    </div>
+  </div>
+  
+  <div id="modal4" class="modal">
+    <div class="modal-content">
+      <div class="flex justify-between items-start mb-6">
+        <h3 class="text-3xl font-bold gradient-text">Financial Reporting Automation</h3>
+        <button onclick="closeModal('modal4')" class="text-3xl text-gray-400 hover:text-gray-600">&times;</button>
+      </div>
+      
+      <div class="space-y-4">
+        <div>
+          <h4 class="font-bold text-lg mb-2 flex items-center">
+            <i class="fas fa-tools text-cyan-500 mr-2"></i>
+            Technologies Used
+          </h4>
+          <div class="flex flex-wrap gap-2">
+            <span class="tech-tag bg-blue-500 text-white">SQL</span>
+            <span class="tech-tag bg-purple-500 text-white">Python</span>
+            <span class="tech-tag bg-green-500 text-white">Excel</span>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="font-bold text-lg mb-2 flex items-center">
+            <i class="fas fa-chart-line text-green-500 mr-2"></i>
+            Key Achievements
+          </h4>
+          <ul class="space-y-2">
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+              <span>45% reduction in monthly report generation time</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+              <span>Eliminated manual data entry errors</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+              <span>Automated multi-source data integration</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="font-bold text-lg mb-2 flex items-center">
+            <i class="fas fa-info-circle text-blue-500 mr-2"></i>
+            Project Details
+          </h4>
+          <p class="text-gray-700">Developed an end-to-end automated solution for monthly financial reporting. Utilized SQL for efficient data extraction, Python for data transformation and analysis, and seamlessly integrated outputs into formatted Excel reports. Implemented scheduled execution for consistent, timely delivery of financial insights.</p>
+        </div>
+      </div>
+      
+      <div class="mt-8 flex justify-end gap-3">
+        <a href="https://github.com/MonishaMurali-26/financial-reporting-automation" class="btn-secondary" target="_blank">
+          <i class="fab fa-github mr-2"></i>View on GitHub
+        </a>
+        <button class="btn-primary" onclick="closeModal('modal4')">Close</button>
+      </div>
+    </div>
+  </div>
+  
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      particlesJS('particles-js', {
-        particles: {
-          number: { value: 80, density: { enable: true, value_area: 800 } },
-          color: { value: '#ffffff' },
-          shape: { type: 'circle' },
-          opacity: { value: 0.5, random: true },
-          size: { value: 3, random: true },
-          line_linked: { enable: true, distance: 150, color: '#ffffff', opacity: 0.4, width: 1 },
-          move: { enable: true, speed: 2, direction: 'none', random: true }
-        },
-        interactivity: {
-          detect_on: 'canvas',
-          events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } },
-          modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
-        },
-        retina_detect: true
+    // Initialize particles.js
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 100, density: { enable: true, value_area: 800 } },
+        color: { value: '#ffffff' },
+        shape: { type: 'circle' },
+        opacity: { value: 0.6, random: true },
+        size: { value: 4, random: true },
+        line_linked: { enable: true, distance: 150, color: '#ffffff', opacity: 0.5, width: 2 },
+        move: { enable: true, speed: 3, direction: 'none', random: true, straight: false, out_mode: 'out' }
+      },
+      interactivity: {
+        detect_on: 'canvas',
+        events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' } },
+        modes: { grab: { distance: 140, line_linked: { opacity: 1 } }, push: { particles_nb: 4 } }
+      },
+      retina_detect: true
+    });
+    
+    // Scroll progress bar
+    window.addEventListener('scroll', () => {
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrollPercentage = (scrollTop / scrollHeight) * 100;
+      document.getElementById('scrollProgress').style.width = scrollPercentage + '%';
+    });
+    
+    // Dark mode toggle
+    const toggleButton = document.getElementById('darkModeToggle');
+    toggleButton.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      const icon = toggleButton.querySelector('i');
+      icon.className = document.body.classList.contains('dark-mode') ? 'fas fa-sun text-xl' : 'fas fa-moon text-xl';
+    });
+    
+    // Copy email
+    document.getElementById('copyEmail').addEventListener('click', function() {
+      navigator.clipboard.writeText('monishagowda685@gmail.com').then(() => {
+        const btn = this;
+        const originalHTML = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check mr-2"></i>Email Copied!';
+        btn.classList.add('bg-green-500');
+        setTimeout(() => {
+          btn.innerHTML = originalHTML;
+          btn.classList.remove('bg-green-500');
+        }, 2000);
       });
-      anime({
-        targets: '.animate',
-        opacity: [0, 1],
-        translateY: [20, 0],
-        delay: anime.stagger(100),
-        duration: 800,
-        easing: 'easeOutQuad'
+    });
+    
+    // Accordion functionality
+    window.toggleAccordion = function(button) {
+      const content = button.nextElementSibling;
+      const isActive = content.classList.contains('active');
+      
+      // Close all accordions
+      document.querySelectorAll('.accordion-content').forEach(item => {
+        item.classList.remove('active');
       });
-      const ctx = document.getElementById('impactChart').getContext('2d');
-      const gradient = ctx.createLinearGradient(0, 0, 200, 0);
-      gradient.addColorStop(0, '#00CED1');
-      gradient.addColorStop(1, '#4B0082');
-      new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: ['Sales Dashboard', 'Vehicle System', 'Customer Segmentation', 'Financial Automation'],
-          datasets: [{
-            label: 'Improvement (%)',
-            data: [15, 25, 18, 45],
-            backgroundColor: gradient,
-            borderColor: '#4B0082',
-            borderWidth: 1
-          }]
-        },
-        options: {
-          indexAxis: 'y',
-          responsive: true,
-          scales: {
-            x: { beginAtZero: true, title: { display: true, text: 'Improvement (%)' }, grid: { color: '#E5E7EB' } },
-            y: { grid: { display: false } }
-          },
-          plugins: {
-            legend: { display: false },
-            title: { display: false },
-            tooltip: {
-              callbacks: {
-                label: ctx => {
-                  const labels = [
-                    '15% increase in deal closures',
-                    '25% improved reporting accuracy',
-                    '18% boost in customer engagement',
-                    '45% reduction in report generation time'
-                  ];
-                  return labels[ctx.dataIndex];
-                }
-              }
-            }
-          },
-          animation: {
-            duration: 1500,
-            easing: 'easeOutQuart',
-            onProgress: animation => {
-              const chart = animation.chart;
-              const ctx = chart.ctx;
-              ctx.font = '12px Poppins';
-              ctx.fillStyle = '#fff';
-              ctx.textAlign = 'center';
-              ctx.textBaseline = 'middle';
-              chart.data.datasets[0].data.forEach((value, index) => {
-                const meta = chart.getDatasetMeta(0);
-                const bar = meta.data[index];
-                const x = bar.x - 20;
-                const y = bar.y;
-                ctx.fillText(`${value}%`, x, y);
-              });
-            }
-          }
+      document.querySelectorAll('.accordion-button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      // Open clicked accordion if it wasn't active
+      if (!isActive) {
+        content.classList.add('active');
+        button.classList.add('active');
+      }
+    };
+    
+    // Modal functions
+    window.openModal = function(id) {
+      document.getElementById(id).style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    };
+    
+    window.closeModal = function(id) {
+      document.getElementById(id).style.display = 'none';
+      document.body.style.overflow = 'auto';
+    };
+    
+    // Close modal on outside click
+    document.querySelectorAll('.modal').forEach(modal => {
+      modal.addEventListener('click', function(e) {
+        if (e.target === this) {
+          closeModal(this.id);
         }
       });
-      window.addEventListener('scroll', () => {
-        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrollPercentage = (scrollTop / scrollHeight) * 100;
-        document.getElementById('scrollProgress').style.width = scrollPercentage + '%';
+    });
+    
+    // Animate on scroll
+    const animateOnScroll = () => {
+      const elements = document.querySelectorAll('.animate');
+      elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        if (elementTop < windowHeight - 100) {
+          anime({
+            targets: element,
+            opacity: [0, 1],
+            translateY: [30, 0],
+            duration: 800,
+            easing: 'easeOutCubic'
+          });
+          element.classList.remove('animate');
+        }
       });
-      const toggleButton = document.getElementById('darkModeToggle');
-      toggleButton.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-        toggleButton.innerHTML = document.body.classList.contains('dark-mode')
-          ? '<i class="fas fa-sun"></i>'
-          : '<i class="fas fa-moon"></i>';
-      });
-      document.getElementById('copyEmail').addEventListener('click', () => {
-        navigator.clipboard.writeText('monishagowda685@gmail.com').then(() => {
-          alert('Email copied to clipboard!');
-        });
-      });
-      window.toggleAccordion = function(button) {
-        const content = button.nextElementSibling;
-        content.classList.toggle('hidden');
-      };
-      window.openModal = function(id) {
-        document.getElementById(id).style.display = 'flex';
-      };
-      window.closeModal = function(id) {
-        document.getElementById(id).style.display = 'none';
-      };
+    };
+    
+    window.addEventListener('scroll', animateOnScroll);
+    animateOnScroll();
+    
+    // Impact Chart
+    const ctx = document.getElementById('impactChart').getContext('2d');
+    const gradient1 = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient1.addColorStop(0, 'rgba(0, 206, 209, 0.8)');
+    gradient1.addColorStop(1, 'rgba(75, 0, 130, 0.8)');
+    
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Sales Dashboard', 'Vehicle System', 'Customer Segmentation', 'Financial Automation'],
+        datasets: [{
+          label: 'Impact Percentage',
+          data: [15, 25, 18, 45],
+          backgroundColor: gradient1,
+          borderColor: '#00CED1',
+          borderWidth: 2,
+          borderRadius: 8
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            padding: 12,
+            titleFont: { size: 14, weight: 'bold' },
+            bodyFont: { size: 13 },
+            callbacks: {
+              label: function(context) {
+                const labels = [
+                  '15% increase in deal closures',
+                  '25% improved reporting accuracy',
+                  '18% boost in customer engagement',
+                  '45% reduction in report time'
+                ];
+                return labels[context.dataIndex];
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            beginAtZero: true,
+            max: 50,
+            ticks: { 
+              callback: value => value + '%',
+              font: { size: 12 }
+            },
+            grid: { color: 'rgba(0, 0, 0, 0.05)' }
+          },
+          y: {
+            ticks: { font: { size: 12 } },
+            grid: { display: false }
+          }
+        },
+        animation: {
+          duration: 2000,
+          easing: 'easeInOutQuart'
+        }
+      }
     });
   </script>
 </body>
